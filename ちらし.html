@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI BOOTCAMP SHIMOKAWA - PERFECT EDITION</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --eva-red: #ff0000;
+            --eva-orange: #f5a623;
+            --ai-cyan: #00f2fe;
+            --bg-black: #000000;
+        }
+        body { 
+            font-family: 'Shippori Mincho', serif; 
+            background-color: #1a1a1a; 
+            color: white;
+            margin: 0;
+            word-break: keep-all; 
+        }
+        .page {
+            width: 210mm; height: 297mm;
+            margin: 20px auto; background: var(--bg-black);
+            position: relative; overflow: hidden;
+            box-sizing: border-box; border: 4px solid var(--eva-red);
+            page-break-after: always;
+        }
+        .ai-grid {
+            position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(255,0,0,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,0,0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+        .hazard-border {
+            background: repeating-linear-gradient(45deg, var(--eva-orange), var(--eva-orange) 10px, #000 10px, #000 20px);
+            height: 12px; width: 100%;
+        }
+        .monitor-frame {
+            border: 2px solid var(--eva-red);
+            position: relative;
+            padding: 24px;
+            background: rgba(255, 0, 0, 0.05);
+        }
+        .monitor-tag {
+            position: absolute; top: -12px; left: 20px;
+            background: var(--eva-red); color: black;
+            font-size: 11px; font-weight: 800; padding: 0 10px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .eng-font { font-family: 'Share Tech Mono', monospace; }
+        .no-wrap { white-space: nowrap; }
+        a { color: inherit; text-decoration: none; transition: 0.3s; }
+        a:hover { color: var(--ai-cyan); text-shadow: 0 0 10px var(--ai-cyan); }
+        
+        /* QRコードの鮮明化 */
+        .qr-code {
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 5px rgba(0, 242, 254, 0.3));
+        }
+        
+        @media print {
+            body { background: none; }
+            .page { margin: 0; box-shadow: none; -webkit-print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="page">
+        <div class="ai-grid"></div>
+        <div class="hazard-border"></div>
+        <div class="p-12 flex flex-col h-full relative z-10">
+            <div class="flex justify-between items-start mb-6 text-red-600">
+                <div class="text-xs eng-font leading-tight">STATUS: RECRUITING_NOW<br>TARGET: IMMERSIVE_DEVELOPMENT</div>
+                <div class="border-2 border-red-600 px-4 py-1 font-black italic">AI_BOOTCAMP_2026</div>
+            </div>
+            <div class="text-center mb-8">
+                <p class="text-2xl font-black tracking-[0.6em] mb-4 text-red-600">AI実装 集中ブートキャンプ</p>
+                <h1 class="text-[115px] leading-none font-black mb-2 tracking-tighter">帰れまてん！</h1>
+                <div class="bg-red-600 text-black py-3 px-12 inline-block text-4xl font-black mb-8 italic">やりきるAI研修 in 下川町</div>
+                <div class="monitor-frame border-orange-500 bg-orange-950/20 mb-6">
+                    <p class="text-3xl font-black tracking-widest text-white leading-relaxed">AIを駆使して、自身の課題に<br><span class="text-orange-500">徹底的に没頭・専念できる特別な時間を。</span></p>
+                </div>
+            </div>
+            <div class="monitor-frame mb-8">
+                <div class="monitor-tag">研修の特徴</div>
+                <div class="grid grid-cols-1 gap-5">
+                    <div class="flex items-center gap-4 text-xl font-black border-b border-red-900/40 pb-2"><span class="text-red-600 eng-font text-sm">01</span><span class="no-wrap">完了まで帰れない、圧倒的に集中できる環境です</span></div>
+                    <div class="flex items-center gap-4 text-xl font-black border-b border-red-900/40 pb-2"><span class="text-red-600 eng-font text-sm">02</span><span class="no-wrap text-orange-400">完了者が次の人を助ける、温かいサポートの連鎖</span></div>
+                    <div class="flex items-center gap-4 text-xl font-black border-b border-red-900/40 pb-2"><span class="text-red-600 eng-font text-sm">03</span><span class="no-wrap">難しい理論より、まずは「形にする」ことに専念</span></div>
+                    <div class="flex items-center gap-4 text-xl font-black"><span class="text-red-600 eng-font text-sm">04</span><span class="no-wrap text-cyan-400">疲れたら五味温泉でリフレッシュして再始動！</span></div>
+                </div>
+            </div>
+            <div class="monitor-frame border-cyan-500 bg-cyan-950/15 mb-6 py-6">
+                <div class="monitor-tag bg-cyan-500">お申し込みはこちら</div>
+                <div class="flex justify-between items-center px-4">
+                    <div class="text-left">
+                        <p class="text-xs eng-font text-cyan-400 mb-1">REGISTRATION_URL</p>
+                        <p class="text-2xl font-black text-white underline decoration-cyan-500 underline-offset-4 italic">
+                            <a href="https://forms.gle/NuatLebwAenTbCJG6" target="_blank">
+                                https://forms.gle/NuatLebwAenTbCJG6
+                            </a>
+                        </p>
+                        <p class="text-xs text-cyan-400 font-bold mt-3 border-l-2 border-cyan-500 pl-3">
+                            申込期限：2026年 1月 31日 23:59まで
+                        </p>
+                    </div>
+                    <div class="w-24 h-24 bg-white p-1 shadow-[0_0_15px_rgba(0,242,254,0.4)]">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOAQMAAABCf2vmAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB+klEQVRoge2ZS27EMAxDBeQAOZKvniPlAAZUkVR+6OymGxYxpmkavS4U2RTtiXjHO97xFyMxtvpZ9rHsUZ/6M1Y8nZ4Ifq9bxJgrwdyKmngSrsia9QAZd64bk8bVGqngwkpmVTJz/gtkxkC6oeydEU7MSpfTExkj+GHu2iB5PHt+fuuLDdJgqeBe+pFVxrp/Bs0QRiSBtdQuaYxbGe2Qeoa5CXVH0vpMXC0RxtGpEnH+xyo5vE1MKyRpJVA9FpPxFBWeiJJWH054JSw1+aZpinCFnV1XTTgok+GJ0CIli4nsQxYDingmbYbM1g/cqFnJYuDeE4FIsOXyBhlL4JdHn3ZCtMOA46OKMNeh7VR4IkE/G4ygIcPSQu/jasJ2CFUws9W9TRNfgCeCouXZo4SjA+c+TJGAIp4pUhppl+49wAuRBC7n4QpfgFbe9ERUOlla9mFsO7TgTBF2qlSQRglT9ejDnkjvloaOHxjEIntOTCck5fu4zV36SG88jZIZwt3taPHTC+DKe54oWSGI5FE9nUboxOWqtBfSxaSP0JSUjRXriDC9jYqu4wc04aY8kWM+DhmlaAPYuxBLhBapr9FCqH41nRGlKE+ho/G4DlcsEXwVw2MVVpJr7rYTNkM4MRnc8rZzol2yRCQe2g5K7GWRbkbJDHnHO97x3fgBEIoOTednv8oAAAAASUVORK5CYII=" 
+                             alt="Entry QR" class="w-full h-full qr-code">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-auto pt-6 border-t border-red-900 flex justify-between items-end opacity-60">
+                <div class="text-sm font-bold flex items-center gap-4"><span class="bg-red-600 text-black px-2 py-0.5">定員</span><span class="text-xl">10名程度（少人数制でしっかりサポート）</span></div>
+                <div class="eng-font text-[10px]">ID: SHIMOKAWA_NODE_01</div>
+            </div>
+        </div>
+        <div class="hazard-border absolute bottom-0"></div>
+    </section>
+
+    <section class="page">
+        <div class="ai-grid" style="opacity: 0.4;"></div>
+        <div class="hazard-border"></div>
+        <div class="p-12 flex flex-col h-full relative z-10">
+            <h2 class="text-4xl font-black text-red-600 mb-10 border-b-4 border-red-600 pb-2 flex justify-between items-baseline">
+                <span>計画概要 / SCHEDULE</span>
+                <span class="eng-font text-xs tracking-widest">MISSION_CODE_2026</span>
+            </h2>
+
+            <div class="grid grid-cols-12 gap-12 flex-grow">
+                <div class="col-span-7">
+                    <div class="monitor-frame mb-12 bg-red-900/10">
+                        <div class="monitor-tag text-xs">OPERATIONAL_SCHEDULE</div>
+                        <h3 class="text-red-600 text-sm font-black mb-6 italic tracking-widest">■ 開催日程：確定</h3>
+                        
+                        <div class="text-center py-6 border border-red-600/40 relative overflow-hidden">
+                            <div class="absolute inset-0 flex items-center justify-center opacity-10">
+                                <p class="text-[120px] font-black eng-font tracking-tighter">2026</p>
+                            </div>
+                            
+                            <div class="relative z-10">
+                                <p class="text-2xl font-black text-white mb-2 tracking-[0.5em] ml-[0.5em]">
+                                    2026年
+                                </p>
+                                <p class="text-[60px] font-black text-white mb-2 leading-none tracking-tighter italic" 
+                                style="filter: drop-shadow(2px 2px 0px #ff0000) skewX(-10deg); text-shadow: 3px 3px 0px rgba(0,0,0,1);">
+                                    3/14<span class="text-4xl px-2 text-white not-italic">,</span>15
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-end mt-8">
+                            <div class="bg-white text-black px-8 py-3">
+                                <p class="text-3xl font-black leading-none">1泊2日</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] text-red-600 eng-font font-bold leading-tight">
+                                    DURATION: 48H_MISSION<br>
+                                    LOCATION: SHIMOKAWA
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-10 border-l-2 border-red-900 ml-2 pl-10 relative">
+                        <div class="relative"><span class="absolute -left-[45px] top-1 w-6 h-1 bg-red-600"></span><p class="font-black text-xl text-white">STEP 01：事前準備（個別の課題壁打ち）</p><p class="text-sm text-gray-300 mt-2 leading-relaxed">申請後、個別に課題の壁打ちを随時実施し、研修当日に向けて実装の解像度を高めます。</p></div>
+                        <div class="relative"><span class="absolute -left-[45px] top-1 w-6 h-1 bg-red-600"></span><p class="font-black text-xl text-white">STEP 02：本研修スタート</p><p class="text-sm text-gray-300 mt-2 leading-relaxed">いよいよ合宿開始。AIをフル活用し、自身の課題を形にすることに48時間徹底的に没頭します。</p></div>
+                    </div>
+                </div>
+
+                <div class="col-span-5 flex flex-col gap-6 text-right">
+                    <div class="relative">
+                        <div class="border-2 border-red-600 p-6 bg-red-900/15">
+                            <p class="text-xs text-red-600 mb-2 eng-font text-left">COST_MANAGEMENT</p>
+                            <p class="text-lg font-black mb-1">参加費：施設利用料のみ</p>
+                            <div class="h-1 bg-red-600 mb-4"></div>
+                            <p class="text-sm text-gray-300 font-bold text-left">参加者数確定後に金額を算出。</p>
+                        </div>
+                        <div class="bg-red-600 text-black text-[10px] font-black p-2 mt-1 text-left leading-tight tracking-tighter">
+                            ※宿泊費・交通費等は各自の実費負担となります
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900/20 p-6 border-r-4 border-red-600">
+                        <p class="text-xs text-red-600 mb-4 eng-font text-left">FINAL_ASSETS</p>
+                        <ul class="text-sm space-y-4 font-bold text-left list-none">
+                            <li class="flex items-start gap-2"><span class="text-red-600">▶</span> 実務で使える具体的な成果物</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600">▶</span> AIツールの実践的実装スキル</li>
+                            <li class="flex items-start gap-2"><span class="text-red-600">▶</span> 「できた！」という圧倒的成功体験</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto p-4 border border-red-900 text-left bg-black shadow-lg">
+                        <p class="text-[10px] text-red-600 eng-font mb-4">CONTACT_PROFILE</p>
+                        <div class="space-y-4">
+                            <p class="text-mm font-bold text-white/50 leading-none">主催：上川管内 Chiikiokoshi AI</p>
+                            <p class="text-sm leading-tight font-black">下川町 地域おこし協力隊<br>菅沼 亮輔</p>
+                            <div class="text-[11px] font-mono mt-2 space-y-1">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-red-600 font-black">contact:</span>
+                                    <a href="https://lit.link/numa3" class="text-cyan-400 underline decoration-cyan-900">https://lit.link/numa3</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="mt-8 flex justify-between items-center opacity-30">
+                <div class="h-[1px] bg-red-600 flex-grow"></div>
+                <div class="text-[8px] eng-font tracking-[0.8em] px-8 uppercase no-wrap">AI_BOOTCAMP_IMMERSIVE_STRATEGY_2026</div>
+                <div class="h-[1px] bg-red-600 flex-grow"></div>
+            </footer>
+        </div>
+        <div class="hazard-border absolute bottom-0"></div>
+    </section>
+
+</body>
+</html>
