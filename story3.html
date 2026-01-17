@@ -2,150 +2,320 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MISSION: SHIMOKAWA_AI_BOOTCAMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
-        /* ストーリーサイズ（9:16）の設定 */
-        body {
+        :root {
+            --eva-red: #FF0000;
+            --eva-orange: #FF9900;
+            --eva-black: #000000;
+            --eva-white: #FFFFFF;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000;
-            color: #fff;
-            font-family: "MS明朝", "serif"; /* エヴァ風の明朝体指定 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        .story-container {
-            width: 1080px;  /* ストーリーの標準解像度 */
-            height: 1920px;
-            background-color: #000;
-            border: 20px solid #ff0000; /* エヴァ警戒色風の枠線 */
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            padding: 80px 40px;
-            position: relative;
-            transform: scale(0.4); /* ブラウザ表示用に縮小（実機では1倍で使用） */
-            transform-origin: top center;
         }
 
-        /* ヘッダー：緊急事態・任務の強調 */
-        .header {
-            border-bottom: 10px solid #fff;
-            margin-bottom: 60px;
-            padding-bottom: 20px;
-        }
-
-        .mission-title {
-            font-size: 140px;
-            font-weight: 900;
-            letter-spacing: -10px;
-            color: #fff;
-            text-align: center;
+        body {
+            background-color: var(--eva-black);
+            color: var(--eva-red);
+            font-family: 'Shippori Mincho B1', serif;
+            overflow-x: hidden;
             line-height: 1.1;
         }
 
-        .sub-title {
-            font-size: 50px;
-            color: #ff0000;
-            text-align: center;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        /* ミッション項目エリア */
-        .content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-        }
-
-        .item {
-            border-left: 15px solid #ff0000;
-            padding-left: 30px;
-            margin-bottom: 40px;
-        }
-
-        .item-label {
-            font-size: 40px;
-            color: #fff;
-            background-color: #ff0000;
-            display: inline-block;
-            padding: 5px 20px;
-            margin-bottom: 15px;
-        }
-
-        .item-text {
-            font-size: 85px; /* ストーリーで見やすい大きさ */
-            font-weight: 900;
-            line-height: 1.2;
-            letter-spacing: 2px;
-        }
-
-        /* フッター：研修の現時点のステータス */
-        .footer {
-            margin-top: auto;
-            text-align: right;
-            border-top: 5px solid #fff;
-            padding-top: 30px;
-        }
-
-        .status {
-            font-size: 45px;
-            color: #fff;
-        }
-
-        /* 装飾用の警告ライン */
-        .warning-stripe {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40px;
+        /* 共通：ハザードパターン */
+        .hazard-stripe {
+            height: 15px;
             background: repeating-linear-gradient(
                 45deg,
-                #ff0000,
-                #ff0000 20px,
-                #000 20px,
-                #000 40px
+                #000,
+                #000 10px,
+                var(--eva-orange) 10px,
+                var(--eva-orange) 20px
             );
+            width: 100%;
         }
+
+        /* ヘッダーエリア */
+        header {
+            padding: 10px;
+            border-bottom: 2px solid var(--eva-red);
+        }
+
+        .system-label {
+            font-family: 'Roboto Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--eva-orange);
+        }
+
+        .mission-id {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 5px 0;
+            border-left: 5px solid var(--eva-red);
+            padding-left: 10px;
+        }
+
+        /* メインタイトル */
+        .main-visual {
+            padding: 20px 10px;
+            text-align: center;
+            border-bottom: 1px solid var(--eva-red);
+        }
+
+        .giant-text {
+            font-size: 4rem;
+            display: block;
+            letter-spacing: -0.2em;
+            margin-bottom: 10px;
+            line-height: 0.9;
+            filter: drop-shadow(0 0 5px var(--eva-red));
+        }
+
+        .sub-message {
+            background-color: var(--eva-white);
+            color: var(--eva-black);
+            font-size: 1.5rem;
+            display: inline-block;
+            padding: 2px 10px;
+            font-weight: 900;
+            transform: skewX(-10deg);
+        }
+
+        /* ステータスモニター */
+        .status-monitor {
+            padding: 20px 10px;
+            background: radial-gradient(circle, #220000 0%, #000 100%);
+        }
+
+        .sync-rate-container {
+            border: 1px solid var(--eva-orange);
+            padding: 15px;
+            position: relative;
+        }
+
+        .sync-label {
+            font-family: 'Roboto Mono', monospace;
+            color: var(--eva-orange);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .sync-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--eva-white);
+            display: inline-block;
+        }
+
+        .sync-percent {
+            font-size: 1.5rem;
+            color: var(--eva-red);
+        }
+
+        .sync-bar-bg {
+            height: 20px;
+            background: #330000;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sync-bar-fill {
+            height: 100%;
+            width: 66.7%;
+            background: linear-gradient(90deg, var(--eva-red), var(--eva-orange));
+            position: relative;
+        }
+
+        .sync-bar-fill::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(0,0,0,0.5) 4px, rgba(0,0,0,0.5) 8px);
+        }
+
+        .status-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--eva-orange);
+            border-top: 1px dashed var(--eva-orange);
+            padding-top: 10px;
+        }
+
+        /* 課題セクション */
+        .mission-list {
+            padding: 20px 10px;
+        }
+
+        .mission-item {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .mission-num {
+            background-color: var(--eva-red);
+            color: var(--eva-black);
+            padding: 5px 10px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-right: 15px;
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .mission-content h3 {
+            font-size: 1.4rem;
+            color: var(--eva-white);
+            margin-bottom: 5px;
+            text-decoration: underline var(--eva-red);
+        }
+
+        .mission-content p {
+            font-size: 0.9rem;
+            color: var(--eva-red);
+        }
+
+        /* 特殊図形：ヘキサゴン */
+        .hexagon-deco {
+            width: 60px;
+            height: 35px;
+            background-color: var(--eva-orange);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--eva-black);
+            font-size: 10px;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+
+        /* フッター */
+        footer {
+            margin-top: 30px;
+            padding-bottom: 50px;
+            text-align: center;
+        }
+
+        .top-secret {
+            border: 4px solid var(--eva-red);
+            display: inline-block;
+            padding: 10px 30px;
+            margin: 20px 0;
+        }
+
+        .top-secret span {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.5em;
+            margin-right: -0.5em;
+        }
+
+        .call-to-action {
+            font-size: 1.2rem;
+            padding: 10px;
+            border: 1px solid var(--eva-red);
+            margin: 10px;
+            background: rgba(255,0,0,0.1);
+        }
+
+        /* 装飾アニメーション */
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        .warning-blink {
+            animation: blink 0.8s infinite;
+            color: var(--eva-orange);
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="story-container">
-        <div class="header">
-            <div class="mission-title">現時点<br>研修任務</div>
-            <div class="sub-title">PARTICIPANT MISSION STATUS</div>
-        </div>
+    <div class="hazard-stripe"></div>
 
-        <div class="content">
-            <div class="item">
-                <div class="item-label">第壱種任務</div>
-                <div class="item-text">項目の内容１<br>を入力</div>
+    <header>
+        <div class="system-label">MAGI_SYS_VER_2.026 / NERV_TACTICAL_INTERFACE</div>
+        <div class="mission-id">MISSION: SHIMOKAWA_AI_BOOTCAMP</div>
+        <div class="system-label" style="text-align: right;">STATUS: <span class="warning-blink">DEBRIEFING_ACTIVE</span></div>
+    </header>
+
+    <main>
+        <section class="main-visual">
+            <span class="giant-text">現況、</span>
+            <span class="giant-text" style="margin-left: 20px;">内訳、</span>
+            <span class="giant-text" style="text-align: right;">志願募る。</span>
+            <div class="sub-message">実装、完遂、或いは沈黙。</div>
+        </section>
+
+        <section class="status-monitor">
+            <div class="sync-rate-container">
+                <div class="sync-label">CURRENT_USER_AI_SYNC_RATE</div>
+                <div>
+                    <span class="sync-value">66.7</span><span class="sync-percent">%</span>
+                </div>
+                <div class="sync-bar-bg">
+                    <div class="sync-bar-fill"></div>
+                </div>
+                <div class="status-text">
+                    <p>参加者の多くが既にAIを導入済。しかし、挑むテーマは全員が『手探り』の状態。完成された人は一人もいない。</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="hexagon-deco">WARNING</div>
+
+        <section class="mission-list">
+            <div class="mission-item">
+                <div class="mission-num">壱</div>
+                <div class="mission-content">
+                    <h3>セミナー運営の省力化・省人化</h3>
+                    <p>SYSTEM_AUTOMATION_PHASE_01</p>
+                </div>
             </div>
 
-            <div class="item">
-                <div class="item-label">第弐種任務</div>
-                <div class="item-text">項目の内容２<br>を入力</div>
+            <div class="mission-item">
+                <div class="mission-num">弐</div>
+                <div class="mission-content">
+                    <h3>分散営業データ、全店舗補足・一括同期</h3>
+                    <p>DATA_SYNCHRONIZATION_ACTIVE</p>
+                </div>
             </div>
 
-            <div class="item">
-                <div class="item-label">第参種任務</div>
-                <div class="item-text">項目の内容３<br>を入力</div>
+            <div class="mission-item">
+                <div class="mission-num">参</div>
+                <div class="mission-content">
+                    <h3>新規事業計画。構造定義からHP実装まで</h3>
+                    <p>NEW_PROJECT_CONSTRUCTION</p>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="footer">
-            <div class="status">本研修参加者：完遂ヲ命ズ</div>
-        </div>
+        <footer>
+            <div class="call-to-action">
+                「使える」を「使いこなす」へ。<br>
+                共に未来を構築する個体鋭意募集中！
+            </div>
 
-        <div class="warning-stripe"></div>
-    </div>
+            <div class="top-secret">
+                <span>極秘</span>
+            </div>
+            
+            <div class="system-label">ONLY_FOR_AUTHORIZED_PERSONNEL_BEYOND_THIS_POINT</div>
+        </footer>
+    </main>
+
+    <div class="hazard-stripe"></div>
 
 </body>
 </html>
