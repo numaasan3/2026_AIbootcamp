@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI BOOT CAMP - EMERGENCY_MONITOR</title>
+    <title>AI BOOT CAMP - PARTICIPANT_PROFILE</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap');
 
@@ -14,7 +14,7 @@
         }
         
         body {
-            background: #050000; /* 漆黒よりわずかに赤み */
+            background: #050000;
             color: #fff;
             font-family: 'Shippori Mincho B1', serif;
             display: flex;
@@ -36,7 +36,6 @@
             box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.2);
         }
 
-        /* ――― 背景レイヤー：グリッドとノイズ ――― */
         .bg-layer {
             position: absolute;
             inset: 0;
@@ -48,7 +47,6 @@
             pointer-events: none;
         }
 
-        /* 走査線エフェクト */
         .scanline {
             position: absolute;
             inset: 0;
@@ -63,7 +61,6 @@
             pointer-events: none;
         }
 
-        /* ――― コンテンツレイヤー ――― */
         .main-content {
             position: relative;
             z-index: 10;
@@ -82,7 +79,6 @@
             position: relative;
         }
 
-        /* 四隅のコーナーパーツ */
         .corner-mark {
             position: absolute;
             width: 20px;
@@ -105,7 +101,7 @@
         }
 
         .title-area {
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .title-main {
@@ -125,14 +121,55 @@
             display: inline-block;
         }
 
+        /* --- レベル可視化セクション --- */
+        .status-monitor {
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .chart-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#FF0000 0% 60%, #333 60% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+        }
+
+        .chart-circle::after {
+            content: "60%";
+            position: absolute;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .status-text {
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .status-text span {
+            color: #FF0000;
+            font-weight: bold;
+        }
+
         .theme-grid {
-            margin-top: 30px;
+            margin-top: 20px;
             flex-grow: 1;
         }
 
         .theme-row {
             border-top: 1px solid rgba(255, 0, 0, 0.5);
-            padding: 15px 0;
+            padding: 12px 0;
             display: flex;
             align-items: flex-start;
         }
@@ -145,7 +182,7 @@
         }
 
         .case-title {
-            font-size: 1.45em;
+            font-size: 1.3em;
             line-height: 1.25;
             letter-spacing: -0.02em;
         }
@@ -154,10 +191,10 @@
             background: rgba(255, 0, 0, 0.9);
             color: #000;
             padding: 12px;
-            font-size: 0.9em;
+            font-size: 0.95em;
             font-weight: 900;
             text-align: center;
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); /* 台形カット */
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
         }
 
         .hazard-bottom {
@@ -188,37 +225,48 @@
                 <div class="corner-mark br"></div>
 
                 <div class="system-header">
-                    <span>OBJECTIVE: PHASE_02</span>
-                    <span>CODE: SHIMOKAWA_PROJECT</span>
+                    <span>OBJECTIVE: TRANSPARENCY</span>
+                    <span>CODE: PARTICIPANT_STATUS</span>
                 </div>
 
                 <div class="title-area">
-                    <h1 class="title-main">多様な<br>課題、<br>襲来。</h1>
-                    <div class="title-sub">REAL-TIME IMPLEMENTATION</div>
+                    <h1 class="title-main">未経験、<br>多数、<br>迎撃。</h1>
+                    <div class="title-sub">LEVEL DISTRIBUTION</div>
+                </div>
+
+                <div class="status-monitor">
+                    <div class="chart-circle"></div>
+                    <div class="status-text">
+                        現在、参加希望者の<span>60%以上</span>が<br>
+                        AI未経験・初級層と判明。<br>
+                        「気後れ」は不要。
+                    </div>
                 </div>
 
                 <div class="theme-grid">
                     <div class="theme-row">
                         <span class="case-num">壱</span>
-                        <p class="case-title">セミナー運営<br>自動化の完遂</p>
+                        <p class="case-title">日々のメール・資料作成の<br>劇的な効率化</p>
                     </div>
                     <div class="theme-row">
                         <span class="case-num">弐</span>
                         <p class="case-title">
-                            在宅ワーク<br>
-                            セミナー効率化<br>
-                            及び、自動化。
+                            プログラミング不要の<br>
+                            独自AIツール構築
                         </p>
                     </div>
                     <div class="theme-row">
                         <span class="case-num">参</span>
-                        <p class="case-title">地域デジタル<br>掲示板の再定義</p>
+                        <p class="case-title">
+                            「AIで何ができるか」<br>
+                            その探索からのスタート
+                        </p>
                     </div>
                 </div>
 
                 <div class="footer-box">
-                    自身の課題を起点とし、<br>
-                    AIによる抜本的解決を完遂せよ。
+                    スキル、経験、一切不問。<br>
+                    等身大の課題で、システムを起動せよ。
                 </div>
             </div>
             <div class="hazard-bottom"></div>
