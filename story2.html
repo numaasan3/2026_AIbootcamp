@@ -1,1 +1,194 @@
-a
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI BOOT CAMP - EMERGENCY</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Shippori Mincho B1', serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .story-container {
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 9/16;
+            background: #000;
+            position: relative;
+            border: 4px solid #FF0000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* ハザードライン */
+        .hazard-border {
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid #FF0000;
+            pointer-events: none;
+        }
+
+        /* ヘッダー情報 */
+        .header-meta {
+            font-family: sans-serif;
+            font-size: 10px;
+            color: #FF0000;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #FF0000;
+        }
+
+        /* タイトルエリア：エヴァ特有の縦組み・巨大文字 */
+        .title-section {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .title-sub {
+            background: #FF0000;
+            color: #000;
+            font-size: 14px;
+            padding: 2px 5px;
+            width: fit-content;
+            font-weight: bold;
+        }
+
+        .title-main {
+            font-size: 3.2em;
+            line-height: 1.1;
+            color: #fff;
+            letter-spacing: -0.05em;
+            word-break: break-all;
+        }
+
+        /* 箇条書き：使徒襲来風の強調 */
+        .theme-section {
+            margin-top: 40px;
+            flex-grow: 1;
+        }
+
+        .theme-item {
+            margin-bottom: 25px;
+            border-left: 8px solid #FF0000;
+            padding-left: 15px;
+        }
+
+        .theme-label {
+            font-size: 12px;
+            color: #FF0000;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .theme-text {
+            font-size: 1.3em;
+            line-height: 1.4;
+            letter-spacing: 0.05em;
+        }
+
+        /* メッセージボックス：システム警告風 */
+        .bottom-message {
+            margin-top: auto;
+            border: 2px solid #FF0000;
+            padding: 15px;
+            position: relative;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .bottom-message::before {
+            content: "CAUTION";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: #FF0000;
+            color: #000;
+            font-size: 10px;
+            padding: 0 5px;
+        }
+
+        .bottom-message p {
+            font-size: 0.95em;
+            line-height: 1.6;
+            color: #FFD700; /* アンバー */
+            text-align: justify;
+        }
+
+        /* 背景の斜線模様 */
+        .bg-stripes {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(
+                -45deg,
+                transparent,
+                transparent 40px,
+                rgba(255, 0, 0, 0.05) 40px,
+                rgba(255, 0, 0, 0.05) 80px
+            );
+            z-index: -1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="story-container">
+        <div class="bg-stripes"></div>
+        <div class="hazard-border"></div>
+
+        <div class="header-meta">
+            <span>STATUS: ACTIVE_DEVELOPMENT</span>
+            <span>SHIMOKAWA_PROJECT_2026</span>
+        </div>
+
+        <div class="title-section">
+            <div class="title-sub">多元的課題解決</div>
+            <h1 class="title-main">多様なテーマ<br>集結。</h1>
+        </div>
+
+        <div class="theme-section">
+            <div class="theme-item">
+                <span class="theme-label">CASE_01</span>
+                <p class="theme-text">セミナー運営<br>自動化・解析</p>
+            </div>
+            
+            <div class="theme-item">
+                <span class="theme-label">CASE_02</span>
+                <p class="theme-text">次世代型<br>事業サイト構築</p>
+            </div>
+            
+            <div class="theme-item">
+                <span class="theme-label">CASE_03</span>
+                <p class="theme-text">地域特化型<br>デジタル掲示板</p>
+            </div>
+        </div>
+
+        <div class="bottom-message">
+            <p>
+                我々は技術者の集団ではない。<br>
+                現場のリアルを、AIという「力」で<br>
+                突破せんとする同志の集まりである。
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
