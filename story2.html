@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI BOOT CAMP - EMERGENCY</title>
+    <title>AI BOOT CAMP - EMERGENCY_MONITOR</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap');
 
@@ -14,136 +14,162 @@
         }
         
         body {
-            background: #000;
+            background: #050000; /* 漆黒よりわずかに赤み */
             color: #fff;
             font-family: 'Shippori Mincho B1', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
         }
         
         .story-container {
             width: 100%;
             max-width: 500px;
             aspect-ratio: 9/16;
-            background: #000;
+            background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
             position: relative;
-            border: 4px solid #FF0000;
             display: flex;
             flex-direction: column;
-            padding: 20px;
+            border: 2px solid #333;
+            box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.2);
         }
 
-        /* ハザードライン */
-        .hazard-border {
+        /* ――― 背景レイヤー：グリッドとノイズ ――― */
+        .bg-layer {
             position: absolute;
-            top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px solid #FF0000;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: 0;
             pointer-events: none;
         }
 
-        /* ヘッダー情報 */
-        .header-meta {
-            font-family: sans-serif;
+        /* 走査線エフェクト */
+        .scanline {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* ――― コンテンツレイヤー ――― */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .outer-frame {
+            flex: 1;
+            border: 2px solid #FF0000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* 四隅のコーナーパーツ */
+        .corner-mark {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 4px solid #FF0000;
+        }
+        .tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+        .tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
+        .bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
+        .br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+
+        .system-header {
+            font-family: 'Courier New', Courier, monospace;
             font-size: 10px;
             color: #FF0000;
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
             border-bottom: 1px solid #FF0000;
+            padding-bottom: 2px;
         }
 
-        /* タイトルエリア：エヴァ特有の縦組み・巨大文字 */
-        .title-section {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+        .title-area {
+            margin-top: 25px;
+        }
+
+        .title-main {
+            font-size: 4.2em;
+            line-height: 0.95;
+            letter-spacing: -0.15em;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .title-sub {
             background: #FF0000;
             color: #000;
-            font-size: 14px;
-            padding: 2px 5px;
-            width: fit-content;
-            font-weight: bold;
+            font-size: 1.1em;
+            padding: 2px 8px;
+            margin-top: 15px;
+            font-weight: 900;
+            display: inline-block;
         }
 
-        .title-main {
-            font-size: 3.2em;
-            line-height: 1.1;
-            color: #fff;
-            letter-spacing: -0.05em;
-            word-break: break-all;
-        }
-
-        /* 箇条書き：使徒襲来風の強調 */
-        .theme-section {
-            margin-top: 40px;
+        .theme-grid {
+            margin-top: 30px;
             flex-grow: 1;
         }
 
-        .theme-item {
-            margin-bottom: 25px;
-            border-left: 8px solid #FF0000;
-            padding-left: 15px;
+        .theme-row {
+            border-top: 1px solid rgba(255, 0, 0, 0.5);
+            padding: 15px 0;
+            display: flex;
+            align-items: flex-start;
         }
 
-        .theme-label {
-            font-size: 12px;
+        .case-num {
+            font-size: 14px;
             color: #FF0000;
-            display: block;
-            margin-bottom: 5px;
+            min-width: 45px;
+            font-weight: bold;
         }
 
-        .theme-text {
-            font-size: 1.3em;
-            line-height: 1.4;
-            letter-spacing: 0.05em;
+        .case-title {
+            font-size: 1.45em;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
         }
 
-        /* メッセージボックス：システム警告風 */
-        .bottom-message {
-            margin-top: auto;
-            border: 2px solid #FF0000;
-            padding: 15px;
-            position: relative;
-            background: rgba(255, 0, 0, 0.1);
-        }
-
-        .bottom-message::before {
-            content: "CAUTION";
-            position: absolute;
-            top: -10px;
-            left: 10px;
-            background: #FF0000;
+        .footer-box {
+            background: rgba(255, 0, 0, 0.9);
             color: #000;
-            font-size: 10px;
-            padding: 0 5px;
+            padding: 12px;
+            font-size: 0.9em;
+            font-weight: 900;
+            text-align: center;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%); /* 台形カット */
         }
 
-        .bottom-message p {
-            font-size: 0.95em;
-            line-height: 1.6;
-            color: #FFD700; /* アンバー */
-            text-align: justify;
-        }
-
-        /* 背景の斜線模様 */
-        .bg-stripes {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        .hazard-bottom {
+            height: 10px;
             background: repeating-linear-gradient(
-                -45deg,
-                transparent,
-                transparent 40px,
-                rgba(255, 0, 0, 0.05) 40px,
-                rgba(255, 0, 0, 0.05) 80px
+                45deg,
+                #FFD700,
+                #FFD700 10px,
+                #000 10px,
+                #000 20px
             );
-            z-index: -1;
+            margin-top: 10px;
         }
 
     </style>
@@ -151,42 +177,51 @@
 <body>
 
     <div class="story-container">
-        <div class="bg-stripes"></div>
-        <div class="hazard-border"></div>
+        <div class="bg-layer"></div>
+        <div class="scanline"></div>
+        
+        <div class="main-content">
+            <div class="outer-frame">
+                <div class="corner-mark tl"></div>
+                <div class="corner-mark tr"></div>
+                <div class="corner-mark bl"></div>
+                <div class="corner-mark br"></div>
 
-        <div class="header-meta">
-            <span>STATUS: ACTIVE_DEVELOPMENT</span>
-            <span>SHIMOKAWA_PROJECT_2026</span>
-        </div>
+                <div class="system-header">
+                    <span>OBJECTIVE: PHASE_02</span>
+                    <span>CODE: SHIMOKAWA_PROJECT</span>
+                </div>
 
-        <div class="title-section">
-            <div class="title-sub">多元的課題解決</div>
-            <h1 class="title-main">多様なテーマ<br>集結。</h1>
-        </div>
+                <div class="title-area">
+                    <h1 class="title-main">多様な<br>課題、<br>襲来。</h1>
+                    <div class="title-sub">REAL-TIME IMPLEMENTATION</div>
+                </div>
 
-        <div class="theme-section">
-            <div class="theme-item">
-                <span class="theme-label">CASE_01</span>
-                <p class="theme-text">セミナー運営<br>自動化・解析</p>
+                <div class="theme-grid">
+                    <div class="theme-row">
+                        <span class="case-num">壱</span>
+                        <p class="case-title">セミナー運営<br>自動化の完遂</p>
+                    </div>
+                    <div class="theme-row">
+                        <span class="case-num">弐</span>
+                        <p class="case-title">
+                            長沼町在宅ワーク<br>
+                            セミナー効率化<br>
+                            及び、自動化。
+                        </p>
+                    </div>
+                    <div class="theme-row">
+                        <span class="case-num">参</span>
+                        <p class="case-title">地域デジタル<br>掲示板の再定義</p>
+                    </div>
+                </div>
+
+                <div class="footer-box">
+                    自身のテレワーク事業を起点とし、<br>
+                    AIによる抜本的解決を完遂せよ。
+                </div>
             </div>
-            
-            <div class="theme-item">
-                <span class="theme-label">CASE_02</span>
-                <p class="theme-text">次世代型<br>事業サイト構築</p>
-            </div>
-            
-            <div class="theme-item">
-                <span class="theme-label">CASE_03</span>
-                <p class="theme-text">地域特化型<br>デジタル掲示板</p>
-            </div>
-        </div>
-
-        <div class="bottom-message">
-            <p>
-                我々は技術者の集団ではない。<br>
-                現場のリアルを、AIという「力」で<br>
-                突破せんとする同志の集まりである。
-            </p>
+            <div class="hazard-bottom"></div>
         </div>
     </div>
 
