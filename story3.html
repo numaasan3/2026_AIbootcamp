@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>STORY_MISSION: AI_BOOTCAMP</title>
+    <title>AI_BOOTCAMP_STORY_V3</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,19 +30,22 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            padding: 60px 0 80px 0;
+            padding: 55px 0 85px 0;
+            border: 1px solid rgba(255, 0, 0, 0.3);
         }
 
+        /* ハザードライン */
         .hazard-stripe {
-            height: 12px;
+            height: 14px;
             background: repeating-linear-gradient(45deg, #000, #000 10px, var(--eva-orange) 10px, var(--eva-orange) 20px);
             width: 100%;
             position: absolute;
             z-index: 10;
         }
         .top { top: 40px; }
-        .bottom { bottom: 65px; }
+        .bottom { bottom: 70px; }
 
+        /* ヘッダー */
         .header-info {
             padding: 0 15px;
             font-family: 'Roboto Mono', monospace;
@@ -52,197 +55,199 @@
             justify-content: space-between;
         }
 
-        /* メインタイトル */
+        /* 巨大タイトル */
         .main-title-box {
-            padding: 5px 10px;
+            padding: 0 10px;
             text-align: center;
         }
         .giant-text {
-            font-size: 4.8rem;
+            font-size: 5rem;
             color: var(--eva-red);
-            line-height: 0.85;
+            line-height: 0.82;
             letter-spacing: -0.25em;
             display: block;
             font-weight: 900;
-            filter: drop-shadow(0 0 3px rgba(255,0,0,0.5));
         }
-        .slogan-box {
-            background-color: var(--eva-white);
+        .sub-slogan {
+            background-color: var(--eva-red);
             color: var(--eva-black);
-            font-size: 1.6rem;
+            font-size: 1.2rem;
             display: inline-block;
-            padding: 2px 12px;
-            margin-top: 15px;
+            padding: 2px 15px;
+            margin-top: 10px;
             font-weight: 900;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.2em;
         }
 
-        /* シンクロ率セクション */
-        .sync-section {
-            padding: 0 20px;
-        }
-        .sync-frame {
-            border: 1px solid var(--eva-red);
-            padding: 10px;
-            background: rgba(40, 0, 0, 0.5);
-        }
-        .sync-label-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 5px;
-        }
-        .sync-val {
-            font-size: 3.8rem;
-            color: var(--eva-white);
-            font-weight: bold;
-            line-height: 1;
-        }
-        .sync-bar {
-            height: 12px;
-            background: #440000;
-            margin: 8px 0;
+        /* 志願者セクション（メイン） */
+        .applicant-monitor {
+            margin: 0 15px;
+            border: 2px solid var(--eva-red);
+            background: rgba(20, 0, 0, 0.8);
             position: relative;
         }
-        .sync-fill {
+        .monitor-header {
+            background: var(--eva-red);
+            color: var(--eva-black);
+            font-size: 1rem;
+            font-weight: 900;
+            padding: 4px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mission-grid {
+            padding: 15px 10px;
+        }
+        .mission-card {
+            margin-bottom: 18px;
+            border-left: 4px solid var(--eva-orange);
+            padding-left: 12px;
+        }
+        .mission-label {
+            color: var(--eva-orange);
+            font-size: 0.8rem;
+            font-family: 'Roboto Mono', monospace;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .mission-title {
+            color: var(--eva-white);
+            font-size: 1.25rem;
+            font-weight: 900;
+            line-height: 1.3;
+        }
+        .mission-desc {
+            color: var(--eva-red);
+            font-size: 0.85rem;
+            margin-top: 4px;
+            opacity: 0.9;
+        }
+
+        /* シンクロ率：下部に統合 */
+        .sync-mini {
+            padding: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .sync-box {
+            width: 60%;
+        }
+        .sync-text {
+            color: var(--eva-white);
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+        }
+        .sync-bar-outer {
+            height: 8px;
+            background: #300;
+            width: 100%;
+        }
+        .sync-bar-inner {
             height: 100%;
             width: 66.7%;
             background: var(--eva-red);
-            box-shadow: 0 0 10px var(--eva-red);
         }
-        .sync-desc {
-            font-size: 0.75rem;
-            color: var(--eva-orange);
-            line-height: 1.4;
-            text-align: justify;
-        }
-
-        /* 志願者課題セクション */
-        .mission-area {
-            padding: 0 20px;
-        }
-        .section-tag {
-            font-size: 0.9rem;
-            background: var(--eva-red);
-            color: var(--eva-black);
-            display: inline-block;
-            padding: 2px 8px;
-            margin-bottom: 15px;
+        .sync-percent {
+            font-size: 2.2rem;
             font-weight: 900;
-        }
-        .mission-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 14px;
-        }
-        .num-icon {
-            border: 2px solid var(--eva-red);
-            color: var(--eva-red);
-            font-size: 1.4rem;
-            width: 35px;
-            height: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-            font-weight: 900;
-            flex-shrink: 0;
-        }
-        .mission-txt {
-            font-size: 1.05rem;
             color: var(--eva-white);
-            letter-spacing: -0.02em;
-            font-weight: 900;
-            line-height: 1.2;
         }
 
         /* フッター */
-        .footer-seal {
+        .footer-area {
             text-align: center;
+            padding-bottom: 10px;
         }
-        .seal {
-            border: 3px solid var(--eva-red);
+        .seal-box {
             display: inline-block;
-            padding: 4px 20px;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: var(--eva-red);
-            transform: rotate(-3deg);
-            margin-bottom: 10px;
+            border: 3px solid var(--eva-red);
+            padding: 5px 25px;
+            transform: rotate(-2deg);
         }
-        .cta-text {
+        .seal-text {
+            color: var(--eva-red);
+            font-size: 2.4rem;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            margin-right: -0.3em;
+        }
+        .final-msg {
             color: var(--eva-orange);
             font-size: 0.85rem;
-            letter-spacing: 0.05em;
+            margin-top: 8px;
+            font-weight: bold;
         }
 
-        /* 背景：警報表示風 */
-        .bg-warning {
+        /* 装飾：背景のグリッド */
+        .bg-grid {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 8rem;
-            color: rgba(255, 0, 0, 0.05);
-            font-weight: 900;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
             z-index: -1;
-            white-space: nowrap;
-            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
     <div class="story-container">
-        <div class="bg-warning">EMERGENCY</div>
+        <div class="bg-grid"></div>
         <div class="hazard-stripe top"></div>
 
         <header class="header-info">
-            <span>FILE: BOOTCAMP_2026</span>
-            <span>STATUS: ACTIVE</span>
+            <span>PROJECT_SHIMOKAWA / AI</span>
+            <span>2026_JAN_18</span>
         </header>
 
         <section class="main-title-box">
             <span class="giant-text">現況、</span>
             <span class="giant-text">内訳、</span>
             <span class="giant-text">志願募。</span>
-            <div class="slogan-box">実装、完遂、或いは沈黙。</div>
+            <div class="sub-slogan">実装、完遂、或いは沈黙。</div>
         </section>
 
-        <section class="sync-section">
-            <div class="sync-frame">
-                <div class="sync-label-area">
-                    <span style="font-size: 10px; color:var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
-                    <span style="font-size: 10px; color:var(--eva-orange)">INTERACTIVE_ONLY</span>
+        <section class="applicant-monitor">
+            <div class="monitor-header">
+                <span>CASE_STUDY: 志願者の実録任務</span>
+                <span>NO.03</span>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <span class="mission-label">MISSION_01</span>
+                    <div class="mission-title">セミナー運営を完全自動化</div>
+                    <div class="mission-desc">集客から案内、当日の省人化フローを構築</div>
                 </div>
-                <div class="sync-val">66.7<span style="font-size:1.5rem">%</span></div>
-                <div class="sync-bar"><div class="sync-fill"></div></div>
-                <div class="sync-desc">
-                    参加者の多くが日常的にAIを導入済。だが、真の活用は全員が『手探り』。完成された個体は、未だ存在しない。
+                <div class="mission-card" style="border-color: var(--eva-red);">
+                    <span class="mission-label">MISSION_02</span>
+                    <div class="mission-title">全店舗データのリアルタイム同期</div>
+                    <div class="mission-desc">バラバラな営業数値をAIで一括捕捉・集計</div>
+                </div>
+                <div class="mission-card">
+                    <span class="mission-label">MISSION_03</span>
+                    <div class="mission-title">新規事業の0→1実装</div>
+                    <div class="mission-desc">構造定義からHP作成まで、AIのみで完結</div>
                 </div>
             </div>
         </section>
 
-        <section class="mission-area">
-            <div class="section-tag">志願者達が挑む現行任務</div>
-            <div class="mission-row">
-                <div class="num-icon">壱</div>
-                <div class="mission-txt">セミナー運営の<br>省力化・省人化</div>
+        <section class="sync-mini">
+            <div class="sync-box">
+                <div class="sync-text">現参加者のAI導入率（手探り状態）</div>
+                <div class="sync-bar-outer">
+                    <div class="sync-bar-inner"></div>
+                </div>
             </div>
-            <div class="mission-row">
-                <div class="num-icon">弐</div>
-                <div class="mission-txt">分散営業データ<br>全店舗一括同期</div>
-            </div>
-            <div class="mission-row">
-                <div class="num-icon">参</div>
-                <div class="mission-txt">新規事業計画<br>構造定義・HP実装</div>
-            </div>
+            <div class="sync-percent">66.7<span style="font-size: 1rem">%</span></div>
         </section>
 
-        <footer class="footer-seal">
-            <div class="seal">極 秘</div>
-            <div class="cta-text">「使える」を「使いこなす」へ。</div>
-            <div class="cta-text" style="font-size: 1rem; color: var(--eva-red); margin-top: 5px;">共に未来を構築する個体、鋭意募集中。</div>
+        <footer class="footer-area">
+            <div class="seal-box">
+                <span class="seal-text">極秘</span>
+            </div>
+            <div class="final-msg">「使える」を「使いこなす」へ。</div>
+            <div class="final-msg" style="color:var(--eva-red); font-size: 1rem;">共に未来を構築する個体、鋭意募集中。</div>
         </footer>
 
         <div class="hazard-stripe bottom"></div>
