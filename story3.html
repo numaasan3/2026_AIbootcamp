@@ -1,1 +1,151 @@
-a
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* ストーリーサイズ（9:16）の設定 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+            font-family: "MS明朝", "serif"; /* エヴァ風の明朝体指定 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .story-container {
+            width: 1080px;  /* ストーリーの標準解像度 */
+            height: 1920px;
+            background-color: #000;
+            border: 20px solid #ff0000; /* エヴァ警戒色風の枠線 */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            padding: 80px 40px;
+            position: relative;
+            transform: scale(0.4); /* ブラウザ表示用に縮小（実機では1倍で使用） */
+            transform-origin: top center;
+        }
+
+        /* ヘッダー：緊急事態・任務の強調 */
+        .header {
+            border-bottom: 10px solid #fff;
+            margin-bottom: 60px;
+            padding-bottom: 20px;
+        }
+
+        .mission-title {
+            font-size: 140px;
+            font-weight: 900;
+            letter-spacing: -10px;
+            color: #fff;
+            text-align: center;
+            line-height: 1.1;
+        }
+
+        .sub-title {
+            font-size: 50px;
+            color: #ff0000;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* ミッション項目エリア */
+        .content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .item {
+            border-left: 15px solid #ff0000;
+            padding-left: 30px;
+            margin-bottom: 40px;
+        }
+
+        .item-label {
+            font-size: 40px;
+            color: #fff;
+            background-color: #ff0000;
+            display: inline-block;
+            padding: 5px 20px;
+            margin-bottom: 15px;
+        }
+
+        .item-text {
+            font-size: 85px; /* ストーリーで見やすい大きさ */
+            font-weight: 900;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        /* フッター：研修の現時点のステータス */
+        .footer {
+            margin-top: auto;
+            text-align: right;
+            border-top: 5px solid #fff;
+            padding-top: 30px;
+        }
+
+        .status {
+            font-size: 45px;
+            color: #fff;
+        }
+
+        /* 装飾用の警告ライン */
+        .warning-stripe {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ff0000,
+                #ff0000 20px,
+                #000 20px,
+                #000 40px
+            );
+        }
+    </style>
+</head>
+<body>
+
+    <div class="story-container">
+        <div class="header">
+            <div class="mission-title">現時点<br>研修任務</div>
+            <div class="sub-title">PARTICIPANT MISSION STATUS</div>
+        </div>
+
+        <div class="content">
+            <div class="item">
+                <div class="item-label">第壱種任務</div>
+                <div class="item-text">項目の内容１<br>を入力</div>
+            </div>
+
+            <div class="item">
+                <div class="item-label">第弐種任務</div>
+                <div class="item-text">項目の内容２<br>を入力</div>
+            </div>
+
+            <div class="item">
+                <div class="item-label">第参種任務</div>
+                <div class="item-text">項目の内容３<br>を入力</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="status">本研修参加者：完遂ヲ命ズ</div>
+        </div>
+
+        <div class="warning-stripe"></div>
+    </div>
+
+</body>
+</html>
