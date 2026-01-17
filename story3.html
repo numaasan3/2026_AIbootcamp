@@ -13,7 +13,6 @@
             --eva-white: #FFFFFF;
         }
 
-        /* インスタストーリー用ベース設定 */
         html, body {
             background-color: var(--eva-black);
             height: 100%;
@@ -24,16 +23,14 @@
             font-family: 'Shippori Mincho B1', serif;
         }
 
-        /* 9:16のコンテナ（ストーリーサイズ） */
         .story-container {
             width: 100vw;
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            border: 2px solid var(--eva-red);
             position: relative;
-            padding: 60px 0 80px 0; /* 上下のアイコン/入力欄回避用セーフエリア */
+            padding: 60px 0 80px 0;
         }
 
         .hazard-stripe {
@@ -41,11 +38,11 @@
             background: repeating-linear-gradient(45deg, #000, #000 10px, var(--eva-orange) 10px, var(--eva-orange) 20px);
             width: 100%;
             position: absolute;
+            z-index: 10;
         }
         .top { top: 40px; }
-        .bottom { bottom: 60px; }
+        .bottom { bottom: 65px; }
 
-        /* ヘッダー */
         .header-info {
             padding: 0 15px;
             font-family: 'Roboto Mono', monospace;
@@ -55,159 +52,197 @@
             justify-content: space-between;
         }
 
-        /* メインタイトル：圧倒的圧迫感 */
+        /* メインタイトル */
         .main-title-box {
-            padding: 10px;
+            padding: 5px 10px;
             text-align: center;
         }
         .giant-text {
-            font-size: 5.2rem;
+            font-size: 4.8rem;
             color: var(--eva-red);
             line-height: 0.85;
             letter-spacing: -0.25em;
             display: block;
             font-weight: 900;
+            filter: drop-shadow(0 0 3px rgba(255,0,0,0.5));
         }
-        .black-box-text {
+        .slogan-box {
             background-color: var(--eva-white);
             color: var(--eva-black);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             display: inline-block;
-            padding: 0 10px;
-            margin-top: 10px;
+            padding: 2px 12px;
+            margin-top: 15px;
             font-weight: 900;
+            letter-spacing: 0.1em;
         }
 
-        /* シンクロ率 */
+        /* シンクロ率セクション */
         .sync-section {
             padding: 0 20px;
         }
         .sync-frame {
             border: 1px solid var(--eva-red);
             padding: 10px;
+            background: rgba(40, 0, 0, 0.5);
+        }
+        .sync-label-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5px;
         }
         .sync-val {
-            font-size: 4rem;
+            font-size: 3.8rem;
             color: var(--eva-white);
             font-weight: bold;
             line-height: 1;
         }
         .sync-bar {
-            height: 15px;
+            height: 12px;
             background: #440000;
-            margin: 5px 0;
+            margin: 8px 0;
+            position: relative;
         }
         .sync-fill {
             height: 100%;
             width: 66.7%;
             background: var(--eva-red);
+            box-shadow: 0 0 10px var(--eva-red);
         }
         .sync-desc {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--eva-orange);
-            margin-top: 5px;
+            line-height: 1.4;
+            text-align: justify;
         }
 
-        /* ミッションリスト */
+        /* 志願者課題セクション */
         .mission-area {
             padding: 0 20px;
+        }
+        .section-tag {
+            font-size: 0.9rem;
+            background: var(--eva-red);
+            color: var(--eva-black);
+            display: inline-block;
+            padding: 2px 8px;
+            margin-bottom: 15px;
+            font-weight: 900;
         }
         .mission-row {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .num-icon {
-            background: var(--eva-red);
-            color: var(--eva-black);
-            font-size: 1.8rem;
-            padding: 0 8px;
-            margin-right: 10px;
+            border: 2px solid var(--eva-red);
+            color: var(--eva-red);
+            font-size: 1.4rem;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
             font-weight: 900;
+            flex-shrink: 0;
         }
         .mission-txt {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--eva-white);
-            letter-spacing: -0.05em;
+            letter-spacing: -0.02em;
+            font-weight: 900;
+            line-height: 1.2;
         }
 
-        /* フッター判子 */
+        /* フッター */
         .footer-seal {
             text-align: center;
         }
         .seal {
-            border: 4px solid var(--eva-red);
+            border: 3px solid var(--eva-red);
             display: inline-block;
-            padding: 5px 20px;
-            font-size: 2rem;
+            padding: 4px 20px;
+            font-size: 2.2rem;
             font-weight: 900;
             color: var(--eva-red);
+            transform: rotate(-3deg);
+            margin-bottom: 10px;
         }
         .cta-text {
             color: var(--eva-orange);
-            font-size: 0.9rem;
-            margin-bottom: 5px;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
         }
 
-        /* 背景装飾：ヘキサゴン（薄く） */
-        .bg-hex {
+        /* 背景：警報表示風 */
+        .bg-warning {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 300px;
-            height: 300px;
-            border: 1px solid rgba(255, 0, 0, 0.1);
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 8rem;
+            color: rgba(255, 0, 0, 0.05);
+            font-weight: 900;
             z-index: -1;
+            white-space: nowrap;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
     <div class="story-container">
-        <div class="bg-hex"></div>
+        <div class="bg-warning">EMERGENCY</div>
         <div class="hazard-stripe top"></div>
 
         <header class="header-info">
-            <span>NERV_TACTICAL_STORY</span>
-            <span>A17_DEBRIEFING</span>
+            <span>FILE: BOOTCAMP_2026</span>
+            <span>STATUS: ACTIVE</span>
         </header>
 
         <section class="main-title-box">
             <span class="giant-text">現況、</span>
             <span class="giant-text">内訳、</span>
             <span class="giant-text">志願募。</span>
-            <div class="black-box-text">実装、完遂、或いは沈黙。</div>
+            <div class="slogan-box">実装、完遂、或いは沈黙。</div>
         </section>
 
         <section class="sync-section">
             <div class="sync-frame">
-                <div style="font-size: 10px; color:var(--eva-red)">AI_SYNCHRO_RATE</div>
+                <div class="sync-label-area">
+                    <span style="font-size: 10px; color:var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
+                    <span style="font-size: 10px; color:var(--eva-orange)">INTERACTIVE_ONLY</span>
+                </div>
                 <div class="sync-val">66.7<span style="font-size:1.5rem">%</span></div>
                 <div class="sync-bar"><div class="sync-fill"></div></div>
-                <div class="sync-desc">参加者の多くがAIを導入済。だが、全員が『手探り』。完成された個体は存在しない。</div>
+                <div class="sync-desc">
+                    参加者の多くが日常的にAIを導入済。だが、真の活用は全員が『手探り』。完成された個体は、未だ存在しない。
+                </div>
             </div>
         </section>
 
         <section class="mission-area">
+            <div class="section-tag">志願者達が挑む現行任務</div>
             <div class="mission-row">
                 <div class="num-icon">壱</div>
-                <div class="mission-txt">セミナー運営の省力化</div>
+                <div class="mission-txt">セミナー運営の<br>省力化・省人化</div>
             </div>
             <div class="mission-row">
                 <div class="num-icon">弐</div>
-                <div class="mission-txt">営業データの一括同期</div>
+                <div class="mission-txt">分散営業データ<br>全店舗一括同期</div>
             </div>
             <div class="mission-row">
                 <div class="num-icon">参</div>
-                <div class="mission-txt">新規事業の構造・HP実装</div>
+                <div class="mission-txt">新規事業計画<br>構造定義・HP実装</div>
             </div>
         </section>
 
         <footer class="footer-seal">
-            <div class="cta-text">「使える」を「使いこなす」へ。</div>
             <div class="seal">極 秘</div>
+            <div class="cta-text">「使える」を「使いこなす」へ。</div>
+            <div class="cta-text" style="font-size: 1rem; color: var(--eva-red); margin-top: 5px;">共に未来を構築する個体、鋭意募集中。</div>
         </footer>
 
         <div class="hazard-stripe bottom"></div>
