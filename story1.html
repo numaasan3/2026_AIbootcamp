@@ -3,10 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI BOOT CAMP - EPISODE:THEME_REV</title>
+    <title>AIブートキャンプ ストーリー 1枚目</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap');
-
         * {
             margin: 0;
             padding: 0;
@@ -14,167 +12,267 @@
         }
         
         body {
+            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
             background: #000;
-            color: #fff;
-            font-family: 'Shippori Mincho B1', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            padding: 20px;
         }
         
         .story-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
             aspect-ratio: 9/16;
             background: #000;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid #333;
+            overflow: hidden;
         }
-
-        .outer-frame {
+        
+        /* 警告ストライプ */
+        .hazard-stripe-top,
+        .hazard-stripe-bottom {
             position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 2px solid #FF0000;
-            padding: 5px;
-            display: flex;
-            flex-direction: column;
+            width: 100%;
+            height: 40px;
+            background: repeating-linear-gradient(
+                45deg,
+                #FFD700,
+                #FFD700 20px,
+                #000 20px,
+                #000 40px
+            );
+            z-index: 10;
         }
-
-        .system-header {
-            font-family: sans-serif;
-            font-size: 11px;
+        
+        .hazard-stripe-top {
+            top: 0;
+        }
+        
+        .hazard-stripe-bottom {
+            bottom: 0;
+        }
+        
+        /* メインフレーム */
+        .main-frame {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            right: 20px;
+            bottom: 50px;
+            border: 3px solid #FF0000;
+            padding: 30px 25px;
+        }
+        
+        /* コーナー装飾 */
+        .corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #FF0000;
+        }
+        
+        .corner-tl {
+            top: -3px;
+            left: -3px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .corner-tr {
+            top: -3px;
+            right: -3px;
+            border-left: none;
+            border-bottom: none;
+        }
+        
+        .corner-bl {
+            bottom: -3px;
+            left: -3px;
+            border-right: none;
+            border-top: none;
+        }
+        
+        .corner-br {
+            bottom: -3px;
+            right: -3px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        /* タイトル */
+        .title {
+            background: #000;
+            border: 3px solid #FF0000;
+            padding: 25px 20px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .title h1 {
             color: #FF0000;
+            font-size: 2.8em;
+            font-weight: 900;
+            line-height: 1.3;
+            text-align: center;
+            letter-spacing: 0.05em;
+            text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.3);
+        }
+        
+        /* ラベル */
+        .label {
+            position: absolute;
+            background: #FF0000;
+            color: #000;
+            font-size: 0.7em;
+            padding: 3px 10px;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+        
+        .label-top {
+            top: -15px;
+            right: 20px;
+        }
+        
+        /* コンテンツエリア */
+        .content {
+            background: rgba(50, 0, 0, 0.3);
+            border: 2px solid #FF0000;
+            padding: 30px 25px;
+            position: relative;
+            min-height: 400px;
+        }
+        
+        .content p {
+            color: #FFF;
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 1.2em;
+        }
+        
+        .content p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* 回路装飾 */
+        .circuit {
+            position: absolute;
+            bottom: 80px;
+            left: 20px;
+            right: 20px;
+            height: 60px;
+            opacity: 0.5;
+        }
+        
+        .circuit-line {
+            position: absolute;
+            background: #FF0000;
+            height: 2px;
+        }
+        
+        .circuit-line-1 {
+            width: 40%;
+            left: 0;
+            top: 20px;
+        }
+        
+        .circuit-line-2 {
+            width: 30%;
+            right: 0;
+            top: 40px;
+        }
+        
+        .circuit-node {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #FF0000;
+            border-radius: 50%;
+        }
+        
+        /* 下部ラベル */
+        .bottom-labels {
+            position: absolute;
+            bottom: 60px;
+            left: 25px;
+            right: 25px;
             display: flex;
             justify-content: space-between;
-            letter-spacing: 0.1em;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #FF0000;
         }
-
-        .title-area {
-            margin-top: 30px;
-            text-align: left;
-            padding-left: 10px;
-        }
-
-        .title-main {
-            font-size: 4.5em;
-            line-height: 0.95;
-            letter-spacing: -0.15em;
-            color: #fff;
-            font-weight: 900;
-        }
-
-        .title-sub {
-            display: inline-block;
+        
+        .bottom-label {
             background: #FF0000;
             color: #000;
-            font-size: 1.2em;
-            padding: 2px 10px;
-            margin-top: 10px;
-            font-weight: 900;
-        }
-
-        .theme-grid {
-            margin-top: 35px;
-            flex-grow: 1;
-            padding: 0 10px;
-        }
-
-        .theme-row {
-            border-top: 1px solid #FF0000;
-            padding: 12px 0;
-            display: flex;
-            align-items: flex-start;
-        }
-
-        .case-num {
-            font-size: 14px;
-            color: #FF0000;
-            min-width: 50px;
-            font-family: sans-serif;
+            font-size: 0.7em;
+            padding: 3px 10px;
             font-weight: bold;
         }
-
-        .case-title {
-            font-size: 1.4em;
-            line-height: 1.3;
-            letter-spacing: 0.02em;
-        }
-
-        /* 修正項目：強調 */
-        .case-highlight {
-            color: #FFD700; /* アンバー */
-        }
-
-        .footer-warning {
-            background: #FF0000;
-            color: #000;
-            padding: 10px;
-            font-size: 0.85em;
-            font-weight: 900;
-            line-height: 1.4;
-            text-align: center;
-        }
-
-        .hazard-bg {
+        
+        /* AI活用表示 */
+        .ai-indicator {
             position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 5px;
-            background: repeating-linear-gradient(
-                90deg,
-                #FFD700,
-                #FFD700 10px,
-                #000 10px,
-                #000 20px
-            );
+            bottom: 100px;
+            left: 25px;
+            color: #FF0000;
+            font-size: 0.8em;
+            font-weight: bold;
         }
-
+        
+        @media (max-width: 600px) {
+            .title h1 {
+                font-size: 2.2em;
+            }
+            
+            .content p {
+                font-size: 1.1em;
+            }
+        }
     </style>
 </head>
 <body>
-
     <div class="story-container">
-        <div class="outer-frame">
-            <div class="system-header">
-                <span>MODEL: AI_BOOTCAMP_2026</span>
-                <span>EMERGENCY_REVISION</span>
+        <!-- 警告ストライプ -->
+        <div class="hazard-stripe-top"></div>
+        <div class="hazard-stripe-bottom"></div>
+        
+        <!-- メインフレーム -->
+        <div class="main-frame">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+            
+            <!-- タイトル -->
+            <div class="title">
+                <span class="label label-top">ターゲット層</span>
+                <h1>どんな課題に挑む？<br>参加者のリアルな<br>テーマ公開</h1>
             </div>
-
-            <div class="title-area">
-                <h1 class="title-main">多様な<br>課題、<br>襲来。</h1>
-                <div class="title-sub">REAL-TIME IMPLEMENTATION</div>
+            
+            <!-- コンテンツ -->
+            <div class="content">
+                <p>AIブートキャンプって、<br>なんだかレベルが高そう…?</p>
+                <p>そんな不安を感じていませんか?<br>ご安心ください!ここに集まるのは、難しい理論よりも<br>「明日から使える実践的な<br>仕組み」を作りたい方ばかりです。</p>
             </div>
-
-            <div class="theme-grid">
-                <div class="theme-row">
-                    <span class="case-num">壱</span>
-                    <p class="case-title">セミナー運営<br>自動化の完遂</p>
-                </div>
-                <div class="theme-row">
-                    <span class="case-num">弐</span>
-                    <p class="case-title case-highlight">
-                        在宅ワーク<br>
-                        セミナー効率化<br>
-                        及び、自動化。
-                    </p>
-                </div>
-                <div class="theme-row">
-                    <span class="case-num">参</span>
-                    <p class="case-title">地域デジタル<br>掲示板の再定義</p>
-                </div>
+            
+            <!-- 回路装飾 -->
+            <div class="circuit">
+                <div class="circuit-line circuit-line-1"></div>
+                <div class="circuit-line circuit-line-2"></div>
+                <div class="circuit-node" style="left: 40%; top: 20px;"></div>
+                <div class="circuit-node" style="right: 30%; top: 40px;"></div>
             </div>
-
-            <div class="footer-warning">
-                自身の事業を起点とし、<br>
-                AIによる抜本的解決を完遂せよ。
+            
+            <!-- 下部ラベル -->
+            <div class="bottom-labels">
+                <span class="bottom-label">実践的目標</span>
+                <span class="bottom-label">ターゲット層</span>
             </div>
+            
+            <!-- AI活用表示 -->
+            <div class="ai-indicator">AI活用</div>
         </div>
-        <div class="hazard-bg"></div>
     </div>
-
 </body>
 </html>
