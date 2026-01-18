@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHASE_02: TARGET_ANALYSIS</title>
+    <title>STORY_01: MISSION_ALERT</title>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --eva-red: #FF0000;
             --eva-black: #000000;
             --eva-orange: #FF9900;
-            --eva-dark-red: #800000;
         }
 
         body {
@@ -19,229 +18,152 @@
             font-family: 'Shippori Mincho B1', serif;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            height: 100vh;
+            width: 100vw;
             display: flex;
             flex-direction: column;
-            border: 2px solid var(--eva-red);
+            overflow: hidden;
+            border: 4px solid var(--eva-red);
         }
 
-        /* ハザードラインのブラッシュアップ */
-        .hazard-bar {
-            height: 12px;
-            background: repeating-linear-gradient(
-                -45deg,
-                #000,
-                #000 10px,
-                var(--eva-orange) 10px,
-                var(--eva-orange) 20px
-            );
-            border-bottom: 2px solid var(--eva-red);
+        /* 背景の警告パターン */
+        .bg-warning {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            opacity: 0.15;
+            z-index: 0;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--eva-red);
+            pointer-events: none;
+            overflow: hidden;
+            align-content: flex-start;
         }
 
         header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
+            z-index: 10;
+            background-color: var(--eva-red);
+            color: #fff;
+            padding: 10px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--eva-red);
-            border-bottom: 1px solid var(--eva-dark-red);
-        }
-
-        .main-container {
-            padding: 20px 15px;
-            flex-grow: 1;
-        }
-
-        .headline {
+            font-size: 0.8rem;
             text-align: center;
-            margin-bottom: 25px;
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
-        .headline h1 {
-            font-size: 2.4rem;
-            color: var(--eva-red);
-            letter-spacing: -0.1rem;
-            line-height: 1;
-            margin-bottom: 8px;
+        main {
+            flex: 1;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
         }
 
-        .headline-sub {
+        .emblem {
+            font-size: 1.2rem;
+            border: 2px solid #fff;
+            padding: 4px 12px;
+            margin-bottom: 20px;
+            letter-spacing: 0.3rem;
+        }
+
+        .main-copy {
+            font-size: 4rem;
+            line-height: 1.1;
+            letter-spacing: -0.4rem;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 4px 4px 0px var(--eva-red);
+        }
+
+        .highlight-box {
             background-color: #fff;
             color: #000;
-            display: inline-block;
-            padding: 2px 12px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            padding: 8px 15px;
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            transform: skewX(-10deg);
         }
 
-        /* 個別事案カードのデザイン強化 */
-        .mission-card {
-            border-left: 1px solid var(--eva-red);
-            border-right: 1px solid var(--eva-red);
-            border-bottom: 1px solid var(--eva-red);
-            margin-bottom: 20px;
-            position: relative;
-            background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        .card-header {
-            background: var(--eva-red);
-            color: #fff;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
-            padding: 2px 10px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .card-body {
-            padding: 15px;
-        }
-
-        .card-body p {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 10px;
-            text-align: justify;
-        }
-
-        .mission-tag {
+        /* 次ページへの誘導アニメーション */
+        .next-indicator {
+            position: absolute;
+            bottom: 60px;
+            right: 20px;
             text-align: right;
-            color: var(--eva-orange);
-            font-size: 0.8rem;
-            border-top: 1px dotted var(--eva-dark-red);
-            padding-top: 5px;
+            animation: blink 0.8s infinite;
         }
 
-        .mission-tag span {
-            font-size: 0.6rem;
-            margin-right: 5px;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
 
-        /* メッセージエリア */
-        .conclusion {
-            margin-top: 30px;
-            padding: 15px;
-            border: 1px double var(--eva-red);
-            background: rgba(255, 0, 0, 0.05);
-        }
-
-        .conclusion p {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #fff;
-            text-align: center;
-        }
-
-        .conclusion b {
-            color: var(--eva-orange);
-            font-size: 1.1rem;
-        }
-
-        footer {
-            padding: 15px;
+        .next-text {
             font-family: 'Share Tech Mono', monospace;
-            background: #111;
+            color: var(--eva-orange);
+            font-size: 1rem;
+            margin-bottom: 5px;
         }
 
-        .bottom-status {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 10px;
+        .arrow {
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 15px solid var(--eva-orange);
+            display: inline-block;
         }
 
-        .percent-large {
-            font-size: 3rem;
-            line-height: 1;
-            font-weight: bold;
-            color: #fff;
-        }
-
-        .percent-unit { font-size: 1rem; }
-
-        .progress-container {
-            width: 100%;
-            height: 8px;
-            background: #333;
-            margin-bottom: 15px;
-        }
-
-        .progress-fill {
-            width: 66.7%;
-            height: 100%;
-            background: var(--eva-red);
-            box-shadow: 0 0 10px var(--eva-red);
+        .hazard-stripe {
+            height: 20px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--eva-orange),
+                var(--eva-orange) 15px,
+                #000 15px,
+                #000 30px
+            );
         }
     </style>
 </head>
 <body>
-    <div class="hazard-bar"></div>
-    <header>
-        <span>FILE: SUBJECT_ANALYSIS_2024</span>
-        <span>STATUS: ANALYZING...</span>
-    </header>
-
-    <div class="main-container">
-        <div class="headline">
-            <h1>志願者の<br>個別事案解析</h1>
-            <div class="headline-sub">実装、完遂、或いは沈黙。</div>
-        </div>
-
-        <div class="mission-card">
-            <div class="card-header">
-                <span>PERSONNEL_A-01</span>
-                <span>PRIORITY: HIGH</span>
-            </div>
-            <div class="card-body">
-                <p>「セミナー運営に忙殺される日々を終焉させたい。AIにルーチンを委譲し、人間はより創造的領域へ移行すべきだ。」</p>
-                <div class="mission-tag">▶ 運営完全自動化ミッション</div>
-            </div>
-        </div>
-
-        <div class="mission-card">
-            <div class="card-header">
-                <span>PERSONNEL_B-02</span>
-                <span>STATUS: ACTIVE</span>
-            </div>
-            <div class="card-body">
-                <p>「地域の全店舗情報を手動で追うのは非効率。AIを巡回させ、デジタル掲示板へ一括同期・管理する体制を構築する。」</p>
-                <div class="mission-tag">▶ 地域情報一括同期ミッション</div>
-            </div>
-        </div>
-
-        <div class="mission-card">
-            <div class="card-header">
-                <span>PERSONNEL_C-03</span>
-                <span>TYPE: RAPID_DEV</span>
-            </div>
-            <div class="card-body">
-                <p>「アイデアは存在する。だが形にするリソースが欠けている。AIを右腕とし、HP実装まで数日で完遂させる。」</p>
-                <div class="mission-tag">▶ 0→1最速具現化ミッション</div>
-            </div>
-        </div>
-
-        <div class="conclusion">
-            <p>
-                エンジニアの集会ではない。<br>
-                <b>「現場の課題を解決したい仲間」</b>が<br>
-                現在、集結しつつある。
-            </p>
-        </div>
+    <div class="bg-warning">
+        WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
     </div>
 
-    <footer>
-        <div class="bottom-status">
-            <div style="color: var(--eva-red); font-size: 0.7rem;">
-                AI_SYNCHRO_RATE
-            </div>
-            <div class="percent-large">66.7<span class="percent-unit">%</span></div>
+    <header>MISSION: AI_BOOTCAMP_2024 / INTERNAL_DOCS</header>
+
+    <main>
+        <div class="emblem">極秘解析</div>
+        <h1 class="main-title">
+            <span style="font-size: 2.5rem; display: block;">どんな課題に</span>
+            挑むのか？
+        </h1>
+        
+        <div class="highlight-box">志願者のリアルなテーマを公開</div>
+
+        <p style="font-size: 1rem; line-height: 1.6; letter-spacing: 0.1rem;">
+            「レベルが高い」という誤解を解く。<br>
+            必要なのは、現場を救う実戦力だ。
+        </p>
+
+        <div class="next-indicator">
+            <div class="next-text">TAP TO ANALYZE</div>
+            <div class="arrow"></div>
         </div>
-        <div class="progress-container">
-            <div class="progress-fill"></div>
-        </div>
-        <div class="hazard-bar"></div>
-    </footer>
+    </main>
+
+    <div class="hazard-stripe"></div>
 </body>
 </html>
