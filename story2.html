@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI_BOOTCAMP_STORY_FINAL</title>
+    <title>AI_BOOTCAMP_STORY_SAFE_SIZE</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,105 +13,148 @@
             --eva-white: #FFFFFF;
         }
 
+        /* 全体：はみ出しを物理的に禁止 */
         html, body {
             background-color: var(--eva-black);
-            height: 100%; width: 100%; overflow: hidden;
-            margin: 0; padding: 0;
+            height: 100dvh; /* 動的ビューポート対応 */
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
             font-family: 'Shippori Mincho B1', serif;
+            box-sizing: border-box;
         }
 
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        /* 9:16比率を維持するメインコンテナ */
         .story-container {
-            width: 100vw; height: 100vh;
-            display: flex; flex-direction: column;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             justify-content: space-between;
             position: relative;
-            padding: 60px 0 90px 0; /* ストーリーUI回避セーフエリア */
+            /* 上下80pxをストーリーUI用セーフエリアとして確保 */
+            padding: 80px 20px 100px 20px; 
+            border: 1px solid rgba(255, 0, 0, 0.2);
         }
 
-        /* ハザードパターン */
+        /* 装飾：ハザードライン（位置をセーフエリア内に調整） */
         .hazard-stripe {
-            height: 14px;
-            background: repeating-linear-gradient(45deg, #000, #000 10px, var(--eva-orange) 10px, var(--eva-orange) 20px);
-            width: 100%; position: absolute; z-index: 10;
+            height: 10px;
+            background: repeating-linear-gradient(45deg, #000, #000 8px, var(--eva-orange) 8px, var(--eva-orange) 16px);
+            width: 100%;
+            position: absolute;
+            left: 0;
         }
-        .top { top: 45px; }
-        .bottom { bottom: 75px; }
+        .top { top: 65px; }
+        .bottom { bottom: 85px; }
 
-        /* ヘッダー */
+        /* ヘッダー情報 */
         .system-header {
-            padding: 0 15px; font-family: 'Roboto Mono', monospace;
-            font-size: 10px; color: var(--eva-orange);
-            display: flex; justify-content: space-between;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 9px;
+            color: var(--eva-orange);
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
         }
 
-        /* タイトル：志願者のミッション紹介 */
+        /* メインタイトル：サイズを少し絞って圧迫感と安全性を両立 */
         .main-title {
-            text-align: center; padding: 0 10px;
+            text-align: center;
+            margin-bottom: 10px;
         }
         .giant-text {
-            font-size: 4rem; color: var(--eva-red);
-            line-height: 0.9; letter-spacing: -0.2em;
-            display: block; font-weight: 900;
+            font-size: 3.2rem; /* 4.0から縮小 */
+            color: var(--eva-red);
+            line-height: 1.0;
+            letter-spacing: -0.15em;
+            display: block;
+            font-weight: 900;
         }
         .sub-bar {
-            background: var(--eva-white); color: var(--eva-black);
-            font-size: 1.2rem; display: inline-block;
-            padding: 0 15px; margin-top: 10px; font-weight: 900;
+            background: var(--eva-white);
+            color: var(--eva-black);
+            font-size: 1rem;
+            display: inline-block;
+            padding: 1px 12px;
+            margin-top: 8px;
+            font-weight: 900;
         }
 
-        /* 隊員ミッションエリア */
+        /* 隊員ミッションエリア：高さを自動調整 */
         .missions-container {
-            padding: 0 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
         }
         .mission-window {
             border: 1px solid var(--eva-red);
-            background: rgba(30, 0, 0, 0.6);
-            margin-bottom: 12px; position: relative;
-            padding: 10px 12px;
-        }
-        .mission-window::before {
-            content: "PERSONNEL_LOG"; position: absolute;
-            top: -8px; left: 10px; background: var(--eva-red);
-            color: var(--eva-black); font-size: 8px; font-family: 'Roboto Mono';
-            padding: 0 5px;
+            background: rgba(40, 0, 0, 0.4);
+            padding: 8px 10px;
+            position: relative;
         }
         .personnel-id {
-            color: var(--eva-orange); font-family: 'Roboto Mono';
-            font-size: 11px; margin-bottom: 4px; display: block;
+            color: var(--eva-orange);
+            font-family: 'Roboto Mono';
+            font-size: 10px;
+            display: block;
+            margin-bottom: 2px;
         }
         .personnel-voice {
-            color: var(--eva-white); font-size: 0.95rem;
-            line-height: 1.4; font-weight: 900;
+            color: var(--eva-white);
+            font-size: 0.85rem; /* スマホ閲覧用に最適化 */
+            line-height: 1.3;
+            font-weight: 900;
         }
         .mission-status {
-            color: var(--eva-red); font-size: 0.75rem;
-            margin-top: 6px; border-top: 1px dashed var(--eva-red);
-            padding-top: 4px; text-align: right;
+            color: var(--eva-red);
+            font-size: 0.7rem;
+            margin-top: 5px;
+            border-top: 1px dashed var(--eva-red);
+            padding-top: 3px;
+            text-align: right;
+            font-weight: 900;
         }
 
         /* シンクロ率セクション */
         .sync-section {
-            padding: 0 20px;
-        }
-        .sync-data-box {
-            border-left: 4px solid var(--eva-red);
-            padding-left: 10px;
+            margin: 15px 0;
         }
         .sync-header {
-            display: flex; justify-content: space-between; align-items: flex-end;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2px;
         }
         .sync-value {
-            font-size: 3rem; color: var(--eva-white); font-weight: 900; line-height: 1;
+            font-size: 2.2rem;
+            color: var(--eva-white);
+            font-weight: 900;
+            line-height: 1;
         }
         .sync-bar-outer {
-            height: 10px; background: #300; margin: 8px 0; width: 100%;
+            height: 8px;
+            background: #200;
+            width: 100%;
+            margin-bottom: 5px;
         }
         .sync-bar-inner {
-            height: 100%; width: 66.7%; background: var(--eva-red);
-            box-shadow: 0 0 10px var(--eva-red);
+            height: 100%;
+            width: 66.7%;
+            background: var(--eva-red);
         }
         .sync-desc {
-            color: var(--eva-orange); font-size: 0.7rem; line-height: 1.4;
+            color: var(--eva-orange);
+            font-size: 0.65rem;
+            line-height: 1.3;
+            text-align: justify;
         }
 
         /* フッター */
@@ -119,41 +162,41 @@
             text-align: center;
         }
         .seal-red {
-            border: 3px solid var(--eva-red); color: var(--eva-red);
-            display: inline-block; padding: 5px 20px;
-            font-size: 2.2rem; font-weight: 900; transform: rotate(-2deg);
+            border: 2px solid var(--eva-red);
+            color: var(--eva-red);
+            display: inline-block;
+            padding: 2px 15px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            transform: rotate(-1deg);
         }
-        .footer-log {
-            font-size: 9px; color: var(--eva-red); margin-top: 10px;
-            font-family: 'Roboto Mono';
+        .footer-note {
+            color: var(--eva-orange);
+            font-size: 0.75rem;
+            margin-top: 8px;
+            font-weight: bold;
         }
 
-        /* 背景：多数の存在を暗示するログ */
-        .bg-log-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            font-family: 'Roboto Mono'; font-size: 8px; color: rgba(255, 0, 0, 0.03);
-            white-space: pre; pointer-events: none; z-index: -1;
-            overflow: hidden; line-height: 1;
+        /* 背景ログ装飾（うっすら） */
+        .bg-deco {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 50% 50%, #110000 0%, #000 100%);
+            z-index: -2;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-log-overlay">
-        ANALYZING_PERSONNEL_D-04... SUCCESS
-        ANALYZING_PERSONNEL_E-05... SUCCESS
-        ANALYZING_PERSONNEL_F-06... SUCCESS
-        ANALYZING_PERSONNEL_G-07... SUCCESS
-        ANALYZING_PERSONNEL_H-08... SUCCESS
-        (Repeat many times to suggest more people)
-    </div>
+    <div class="bg-deco"></div>
 
     <div class="story-container">
         <div class="hazard-stripe top"></div>
+        <div class="hazard-stripe bottom"></div>
 
         <header class="system-header">
-            <span>FILE: SELECTED_MISSIONS_2026</span>
-            <span>STATUS: ANALYZING...</span>
+            <span>FILE: BOOTCAMP_LOG</span>
+            <span>STATUS: ANALYZING</span>
         </header>
 
         <section class="main-title">
@@ -174,7 +217,7 @@
             <div class="mission-window">
                 <span class="personnel-id">PERSONNEL_B-02</span>
                 <div class="personnel-voice">
-                    「自分の住んでいる街にある全店舗の営業時間をいちいち確認して回るのは無駄。AIを街中に巡回させて、サイトの情報を一元管理したい。」
+                    「自分の住んでいる街にある全店舗の営業時間をいちいち確認して回るのは無駄。AIを街中に巡回させて、一元管理したい。」
                 </div>
                 <div class="mission-status">▶︎ 地域情報一括同期ミッション</div>
             </div>
@@ -189,27 +232,20 @@
         </main>
 
         <section class="sync-section">
-            <div class="sync-data-box">
-                <div class="sync-header">
-                    <span style="font-size: 10px; color: var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
-                    <span class="sync-value">66.7<span style="font-size: 1rem">%</span></span>
-                </div>
-                <div class="sync-bar-outer"><div class="sync-bar-inner"></div></div>
-                <p class="sync-desc">
-                    平均シンクロ率66.7%。日常的な利用はクリアしているが、ビジネスを根底から変革させる『覚醒状態』には至っていない。このキャンプで残りの33.3%を埋め、ミッションを完遂せよ。
-                </p>
+            <div class="sync-header">
+                <span style="font-size: 8px; color: var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
+                <span class="sync-value">66.7<span style="font-size: 0.8rem">%</span></span>
             </div>
+            <div class="sync-bar-outer"><div class="sync-bar-inner"></div></div>
+            <p class="sync-desc">
+                平均シンクロ率66.7%。日常的な利用はクリアしているが、ビジネスを変革させる『覚醒状態』には至っていない。このキャンプで残りの33.3%を埋めよ。
+            </p>
         </section>
 
         <footer class="footer-action">
             <div class="seal-red">極 秘</div>
-            <div style="color: var(--eva-orange); font-size: 0.9rem; margin-top: 5px;">
-                ※他、多数の個別ミッションを同時解析中。
-            </div>
-            <div class="footer-log">AUTHORIZED_PERSONNEL_ONLY_2026</div>
+            <div class="footer-note">※他、多数の個別ミッションを同時解析中。</div>
         </footer>
-
-        <div class="hazard-stripe bottom"></div>
     </div>
 
 </body>
