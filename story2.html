@@ -2,208 +2,215 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI BOOT CAMP - ACTUAL_STATUS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI_BOOTCAMP_STORY_FINAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --eva-red: #FF0000;
+            --eva-orange: #FF9900;
+            --eva-black: #000000;
+            --eva-white: #FFFFFF;
         }
-        
-        body {
-            background: #050000;
-            color: #fff;
+
+        html, body {
+            background-color: var(--eva-black);
+            height: 100%; width: 100%; overflow: hidden;
+            margin: 0; padding: 0;
             font-family: 'Shippori Mincho B1', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
         }
-        
+
         .story-container {
-            width: 100%;
-            max-width: 500px;
-            aspect-ratio: 9/16;
-            background: radial-gradient(circle at center, #1a0000 0%, #000 100%);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 2px solid #333;
-            box-shadow: inset 0 0 50px rgba(255, 0, 0, 0.2);
-        }
-
-        .bg-layer {
-            position: absolute;
-            inset: 0;
-            background-image: 
-                linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.1) 1px, transparent 1px);
-            background-size: 20px 20px;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .scanline {
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 2px);
-            z-index: 5;
-            pointer-events: none;
-        }
-
-        .main-content {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .outer-frame {
-            flex: 1;
-            border: 2px solid #FF0000;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .corner-mark {
-            position: absolute; width: 20px; height: 20px; border: 4px solid #FF0000;
-        }
-        .tl { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
-        .tr { top: -2px; right: -2px; border-left: 0; border-bottom: 0; }
-        .bl { bottom: -2px; left: -2px; border-right: 0; border-top: 0; }
-        .br { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
-
-        .system-header {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 10px;
-            color: #FF0000;
-            display: flex;
+            width: 100vw; height: 100vh;
+            display: flex; flex-direction: column;
             justify-content: space-between;
-            border-bottom: 1px solid #FF0000;
-            padding-bottom: 2px;
-        }
-
-        .title-area { margin-top: 20px; }
-        .title-main { font-size: 3.5em; line-height: 1.0; letter-spacing: -0.1em; }
-        .title-sub { background: #FF0000; color: #000; font-size: 1.1em; padding: 2px 8px; margin-top: 15px; font-weight: 900; display: inline-block; }
-
-        /* --- 事実に基づくデータセクション --- */
-        .status-monitor {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid rgba(255, 215, 0, 0.5);
-            background: rgba(255, 215, 0, 0.05);
-        }
-
-        .data-label { color: #FFD700; font-size: 11px; font-family: monospace; margin-bottom: 5px; }
-        
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .progress-bar {
-            flex-grow: 1;
-            height: 15px;
-            background: #222;
-            border: 1px solid #FFD700;
             position: relative;
+            padding: 60px 0 90px 0; /* ストーリーUI回避セーフエリア */
         }
 
-        .progress-fill {
-            height: 100%;
-            background: #FFD700;
-            width: 66.7%; /* 3件中2件の事実 */
+        /* ハザードパターン */
+        .hazard-stripe {
+            height: 14px;
+            background: repeating-linear-gradient(45deg, #000, #000 10px, var(--eva-orange) 10px, var(--eva-orange) 20px);
+            width: 100%; position: absolute; z-index: 10;
+        }
+        .top { top: 45px; }
+        .bottom { bottom: 75px; }
+
+        /* ヘッダー */
+        .system-header {
+            padding: 0 15px; font-family: 'Roboto Mono', monospace;
+            font-size: 10px; color: var(--eva-orange);
+            display: flex; justify-content: space-between;
         }
 
-        .data-value { font-size: 1.2em; color: #FFD700; font-weight: bold; }
+        /* タイトル：志願者のミッション紹介 */
+        .main-title {
+            text-align: center; padding: 0 10px;
+        }
+        .giant-text {
+            font-size: 4rem; color: var(--eva-red);
+            line-height: 0.9; letter-spacing: -0.2em;
+            display: block; font-weight: 900;
+        }
+        .sub-bar {
+            background: var(--eva-white); color: var(--eva-black);
+            font-size: 1.2rem; display: inline-block;
+            padding: 0 15px; margin-top: 10px; font-weight: 900;
+        }
 
-        .status-desc { font-size: 0.85em; margin-top: 8px; line-height: 1.4; color: #ccc; }
+        /* 隊員ミッションエリア */
+        .missions-container {
+            padding: 0 15px;
+        }
+        .mission-window {
+            border: 1px solid var(--eva-red);
+            background: rgba(30, 0, 0, 0.6);
+            margin-bottom: 12px; position: relative;
+            padding: 10px 12px;
+        }
+        .mission-window::before {
+            content: "PERSONNEL_LOG"; position: absolute;
+            top: -8px; left: 10px; background: var(--eva-red);
+            color: var(--eva-black); font-size: 8px; font-family: 'Roboto Mono';
+            padding: 0 5px;
+        }
+        .personnel-id {
+            color: var(--eva-orange); font-family: 'Roboto Mono';
+            font-size: 11px; margin-bottom: 4px; display: block;
+        }
+        .personnel-voice {
+            color: var(--eva-white); font-size: 0.95rem;
+            line-height: 1.4; font-weight: 900;
+        }
+        .mission-status {
+            color: var(--eva-red); font-size: 0.75rem;
+            margin-top: 6px; border-top: 1px dashed var(--eva-red);
+            padding-top: 4px; text-align: right;
+        }
 
-        .theme-grid { margin-top: 20px; flex-grow: 1; }
-        .theme-row { border-top: 1px solid rgba(255, 0, 0, 0.5); padding: 10px 0; display: flex; align-items: flex-start; }
-        .case-num { font-size: 14px; color: #FF0000; min-width: 45px; font-weight: bold; }
-        .case-title { font-size: 1.25em; line-height: 1.3; }
+        /* シンクロ率セクション */
+        .sync-section {
+            padding: 0 20px;
+        }
+        .sync-data-box {
+            border-left: 4px solid var(--eva-red);
+            padding-left: 10px;
+        }
+        .sync-header {
+            display: flex; justify-content: space-between; align-items: flex-end;
+        }
+        .sync-value {
+            font-size: 3rem; color: var(--eva-white); font-weight: 900; line-height: 1;
+        }
+        .sync-bar-outer {
+            height: 10px; background: #300; margin: 8px 0; width: 100%;
+        }
+        .sync-bar-inner {
+            height: 100%; width: 66.7%; background: var(--eva-red);
+            box-shadow: 0 0 10px var(--eva-red);
+        }
+        .sync-desc {
+            color: var(--eva-orange); font-size: 0.7rem; line-height: 1.4;
+        }
 
-        .footer-box {
-            background: rgba(255, 0, 0, 0.9);
-            color: #000;
-            padding: 12px;
-            font-size: 0.9em;
-            font-weight: 900;
+        /* フッター */
+        .footer-action {
             text-align: center;
-            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+        }
+        .seal-red {
+            border: 3px solid var(--eva-red); color: var(--eva-red);
+            display: inline-block; padding: 5px 20px;
+            font-size: 2.2rem; font-weight: 900; transform: rotate(-2deg);
+        }
+        .footer-log {
+            font-size: 9px; color: var(--eva-red); margin-top: 10px;
+            font-family: 'Roboto Mono';
         }
 
-        .hazard-bottom {
-            height: 10px;
-            background: repeating-linear-gradient(45deg, #FFD700, #FFD700 10px, #000 10px, #000 20px);
-            margin-top: 10px;
+        /* 背景：多数の存在を暗示するログ */
+        .bg-log-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            font-family: 'Roboto Mono'; font-size: 8px; color: rgba(255, 0, 0, 0.03);
+            white-space: pre; pointer-events: none; z-index: -1;
+            overflow: hidden; line-height: 1;
         }
     </style>
 </head>
 <body>
-    <div class="story-container">
-        <div class="bg-layer"></div>
-        <div class="scanline"></div>
-        <div class="main-content">
-            <div class="outer-frame">
-                <div class="corner-mark tl"></div>
-                <div class="corner-mark tr"></div>
-                <div class="corner-mark bl"></div>
-                <div class="corner-mark br"></div>
-                <div class="system-header">
-                    <span>MISSION: SHIMOKAWA_AI_BOOTCAMP</span>
-                    <span>STATUS: DEBRIEFING_ACTIVE</span>
-                </div>
-                <div class="title-area">
-                    <h1 class="title-main">現況、内訳、<br>志願募る。</h1>
-                    <div class="title-sub">CURRENT_USER_LEVEL</div>
-                </div>
 
-                <div class="status-monitor">
-                    <div class="data-label">AI活用状況（日常的利用）</div>
-                    <div class="progress-container">
-                        <div class="progress-bar"><div class="progress-fill"></div></div>
-                        <span class="data-value">66.7%</span>
-                    </div>
-                    <p class="status-desc">
-                        参加者の多くが既にAIを導入済。<br>
-                        しかし、挑むテーマは全員が『手探り』の状態。<br>完成された人は一人もいない。
-                    </p>
-                </div>
-
-                <div class="theme-grid">
-                    <div class="theme-row">
-                        <span class="case-num">壱</span>
-                        <p class="case-title">セミナー運営の<br>省力化・省人化</p>
-                    </div>
-                    <div class="theme-row">
-                        <span class="case-num">弐</span>
-                        <p class="case-title">分散営業データ、<br>全店舗補足・一括同期</p>
-                    </div>
-                    <div class="theme-row">
-                        <span class="case-num">参</span>
-                        <p class="case-title">新規事業計画。<br>構造定義からHP実装まで</p>
-                    </div>
-                </div>
-
-                <div class="footer-box">
-                    「使える」を「使いこなす」へ。<br>
-                    共に未来を構築する個体鋭意募集中！
-                </div>
-            </div>
-            <div class="hazard-bottom"></div>
-        </div>
+    <div class="bg-log-overlay">
+        ANALYZING_PERSONNEL_D-04... SUCCESS
+        ANALYZING_PERSONNEL_E-05... SUCCESS
+        ANALYZING_PERSONNEL_F-06... SUCCESS
+        ANALYZING_PERSONNEL_G-07... SUCCESS
+        ANALYZING_PERSONNEL_H-08... SUCCESS
+        (Repeat many times to suggest more people)
     </div>
+
+    <div class="story-container">
+        <div class="hazard-stripe top"></div>
+
+        <header class="system-header">
+            <span>FILE: SELECTED_MISSIONS_2026</span>
+            <span>STATUS: ANALYZING...</span>
+        </header>
+
+        <section class="main-title">
+            <span class="giant-text">志願者の</span>
+            <span class="giant-text">ミッション紹介</span>
+            <div class="sub-bar">実装、完遂、或いは沈黙。</div>
+        </section>
+
+        <main class="missions-container">
+            <div class="mission-window">
+                <span class="personnel-id">PERSONNEL_A-01</span>
+                <div class="personnel-voice">
+                    「セミナー運営に追われる日々を終わらせたい。AIに全部投げて、自分はもっとクリエイティブなことに時間を使いたい。」
+                </div>
+                <div class="mission-status">▶︎ 運営完全自動化ミッション</div>
+            </div>
+
+            <div class="mission-window">
+                <span class="personnel-id">PERSONNEL_B-02</span>
+                <div class="personnel-voice">
+                    「自分の住んでいる街にある全店舗の営業時間をいちいち確認して回るのは無駄。AIを街中に巡回させて、サイトの情報を一元管理したい。」
+                </div>
+                <div class="mission-status">▶︎ 地域情報一括同期ミッション</div>
+            </div>
+
+            <div class="mission-window">
+                <span class="personnel-id">PERSONNEL_C-03</span>
+                <div class="personnel-voice">
+                    「アイデアはあるが形にする人がいない。AIを右腕にして、HP実装まで数日でやり遂げたい。」
+                </div>
+                <div class="mission-status">▶︎ 0→1最速具現化ミッション</div>
+            </div>
+        </main>
+
+        <section class="sync-section">
+            <div class="sync-data-box">
+                <div class="sync-header">
+                    <span style="font-size: 10px; color: var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
+                    <span class="sync-value">66.7<span style="font-size: 1rem">%</span></span>
+                </div>
+                <div class="sync-bar-outer"><div class="sync-bar-inner"></div></div>
+                <p class="sync-desc">
+                    平均シンクロ率66.7%。日常的な利用はクリアしているが、ビジネスを根底から変革させる『覚醒状態』には至っていない。このキャンプで残りの33.3%を埋め、ミッションを完遂せよ。
+                </p>
+            </div>
+        </section>
+
+        <footer class="footer-action">
+            <div class="seal-red">極 秘</div>
+            <div style="color: var(--eva-orange); font-size: 0.9rem; margin-top: 5px;">
+                ※他、多数の個別ミッションを同時解析中。
+            </div>
+            <div class="footer-log">AUTHORIZED_PERSONNEL_ONLY_2026</div>
+        </footer>
+
+        <div class="hazard-stripe bottom"></div>
+    </div>
+
 </body>
 </html>
