@@ -3,276 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIブートキャンプ ストーリー 1枚目</title>
+    <title>MISSION: AI_BOOTCAMP_PHASE1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --eva-red: #FF0000;
+            --eva-black: #050505;
+            --eva-orange: #FF9900;
+            --eva-yellow: #FFCC00;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .story-container {
-            width: 100%;
-            max-width: 600px;
-            aspect-ratio: 9/16;
-            background: #000;
-            position: relative;
+            background-color: var(--eva-black);
+            color: #fff;
+            font-family: 'Shippori Mincho B1', serif;
             overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            border: 4px solid var(--eva-red);
         }
-        
-        /* 警告ストライプ */
-        .hazard-stripe-top,
-        .hazard-stripe-bottom {
-            position: absolute;
-            width: 100%;
-            height: 40px;
+
+        /* ハザードパターン */
+        .hazard-stripe {
+            height: 15px;
             background: repeating-linear-gradient(
                 45deg,
-                #FFD700,
-                #FFD700 20px,
-                #000 20px,
-                #000 40px
+                var(--eva-yellow),
+                var(--eva-yellow) 10px,
+                var(--eva-black) 10px,
+                var(--eva-black) 20px
             );
-            z-index: 10;
+            width: 100%;
         }
-        
-        .hazard-stripe-top {
-            top: 0;
+
+        /* ヘッダーセクション */
+        header {
+            padding: 10px;
+            border-bottom: 2px solid var(--eva-red);
+            font-family: 'Share Tech Mono', monospace;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .hazard-stripe-bottom {
-            bottom: 0;
+
+        .system-code {
+            font-size: 0.7rem;
+            color: var(--eva-red);
+            letter-spacing: 1px;
         }
-        
-        /* メインフレーム */
-        .main-frame {
-            position: absolute;
-            top: 50px;
-            left: 20px;
-            right: 20px;
-            bottom: 50px;
-            border: 3px solid #FF0000;
-            padding: 30px 25px;
-        }
-        
-        /* コーナー装飾 */
-        .corner {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 3px solid #FF0000;
-        }
-        
-        .corner-tl {
-            top: -3px;
-            left: -3px;
-            border-right: none;
-            border-bottom: none;
-        }
-        
-        .corner-tr {
-            top: -3px;
-            right: -3px;
-            border-left: none;
-            border-bottom: none;
-        }
-        
-        .corner-bl {
-            bottom: -3px;
-            left: -3px;
-            border-right: none;
-            border-top: none;
-        }
-        
-        .corner-br {
-            bottom: -3px;
-            right: -3px;
-            border-left: none;
-            border-top: none;
-        }
-        
-        /* タイトル */
-        .title {
-            background: #000;
-            border: 3px solid #FF0000;
-            padding: 25px 20px;
-            margin-bottom: 30px;
+
+        /* メインビジュアル */
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             position: relative;
-        }
-        
-        .title h1 {
-            color: #FF0000;
-            font-size: 2.8em;
-            font-weight: 900;
-            line-height: 1.3;
+            padding: 20px;
             text-align: center;
-            letter-spacing: 0.05em;
-            text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.3);
         }
-        
-        /* ラベル */
-        .label {
+
+        .bg-hexagon {
             position: absolute;
-            background: #FF0000;
+            width: 150px;
+            height: 150px;
+            background-color: rgba(255, 0, 0, 0.05);
+            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+            z-index: -1;
+            animation: pulse 4s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); opacity: 0.1; }
+            to { transform: scale(1.5); opacity: 0.3; }
+        }
+
+        .title-box {
+            background-color: #fff;
             color: #000;
-            font-size: 0.7em;
-            padding: 3px 10px;
+            padding: 5px 15px;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
             font-weight: bold;
-            letter-spacing: 0.1em;
         }
-        
-        .label-top {
-            top: -15px;
-            right: 20px;
+
+        .main-title {
+            font-size: 3rem;
+            line-height: 1.1;
+            letter-spacing: -0.2rem;
+            color: var(--eva-red);
+            text-shadow: 2px 2px 0px #fff;
+            margin-bottom: 20px;
         }
-        
-        /* コンテンツエリア */
-        .content {
-            background: rgba(50, 0, 0, 0.3);
-            border: 2px solid #FF0000;
-            padding: 30px 25px;
-            position: relative;
-            min-height: 400px;
-        }
-        
-        .content p {
-            color: #FFF;
-            font-size: 1.3em;
+
+        .sub-message {
+            font-size: 1.1rem;
             line-height: 1.8;
-            margin-bottom: 1.2em;
+            letter-spacing: 0.1rem;
+            background: rgba(255, 0, 0, 0.15);
+            padding: 10px;
+            border-left: 5px solid var(--eva-red);
+            text-align: left;
         }
-        
-        .content p:last-child {
-            margin-bottom: 0;
+
+        /* シンクロ率セクション */
+        .status-monitor {
+            width: 90%;
+            margin-top: 30px;
+            border: 1px solid var(--eva-orange);
+            padding: 10px;
         }
-        
-        /* 回路装飾 */
-        .circuit {
-            position: absolute;
-            bottom: 80px;
-            left: 20px;
-            right: 20px;
-            height: 60px;
-            opacity: 0.5;
-        }
-        
-        .circuit-line {
-            position: absolute;
-            background: #FF0000;
-            height: 2px;
-        }
-        
-        .circuit-line-1 {
-            width: 40%;
-            left: 0;
-            top: 20px;
-        }
-        
-        .circuit-line-2 {
-            width: 30%;
-            right: 0;
-            top: 40px;
-        }
-        
-        .circuit-node {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #FF0000;
-            border-radius: 50%;
-        }
-        
-        /* 下部ラベル */
-        .bottom-labels {
-            position: absolute;
-            bottom: 60px;
-            left: 25px;
-            right: 25px;
+
+        .status-label {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--eva-orange);
             display: flex;
             justify-content: space-between;
         }
-        
-        .bottom-label {
-            background: #FF0000;
-            color: #000;
-            font-size: 0.7em;
-            padding: 3px 10px;
-            font-weight: bold;
+
+        .sync-bar-container {
+            height: 20px;
+            background: #222;
+            margin-top: 5px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        /* AI活用表示 */
-        .ai-indicator {
+
+        .sync-bar-fill {
+            height: 100%;
+            width: 66.7%;
+            background: linear-gradient(90deg, #550000, var(--eva-red));
+            box-shadow: 0 0 10px var(--eva-red);
+        }
+
+        /* フッター */
+        footer {
+            padding: 15px;
+            position: relative;
+        }
+
+        .stamp-box {
+            border: 2px solid var(--eva-red);
+            color: var(--eva-red);
+            padding: 5px 10px;
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: bold;
+            transform: rotate(-5deg);
+        }
+
+        .emergency-label {
             position: absolute;
-            bottom: 100px;
-            left: 25px;
-            color: #FF0000;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-        
-        @media (max-width: 600px) {
-            .title h1 {
-                font-size: 2.2em;
-            }
-            
-            .content p {
-                font-size: 1.1em;
-            }
+            right: 15px;
+            bottom: 35px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--eva-red);
+            text-align: right;
         }
     </style>
 </head>
 <body>
-    <div class="story-container">
-        <!-- 警告ストライプ -->
-        <div class="hazard-stripe-top"></div>
-        <div class="hazard-stripe-bottom"></div>
+    <div class="hazard-stripe"></div>
+    
+    <header>
+        <div class="system-code">MAGI_SYSTEM: ELABORATION_MODE_ON</div>
+        <div class="system-code">A-17: WARNING</div>
+    </header>
+
+    <main>
+        <div class="bg-hexagon"></div>
         
-        <!-- メインフレーム -->
-        <div class="main-frame">
-            <div class="corner corner-tl"></div>
-            <div class="corner corner-tr"></div>
-            <div class="corner corner-bl"></div>
-            <div class="corner corner-br"></div>
-            
-            <!-- タイトル -->
-            <div class="title">
-                <span class="label label-top">ターゲット層</span>
-                <h1>どんな課題に挑む？<br>参加者のリアルな<br>テーマ公開</h1>
-            </div>
-            
-            <!-- コンテンツ -->
-            <div class="content">
-                <p>AIブートキャンプって、<br>なんだかレベルが高そう…?</p>
-                <p>そんな不安を感じていませんか?<br>ご安心ください!ここに集まるのは、難しい理論よりも<br>「明日から使える実践的な<br>仕組み」を作りたい方ばかりです。</p>
-            </div>
-            
-            <!-- 回路装飾 -->
-            <div class="circuit">
-                <div class="circuit-line circuit-line-1"></div>
-                <div class="circuit-line circuit-line-2"></div>
-                <div class="circuit-node" style="left: 40%; top: 20px;"></div>
-                <div class="circuit-node" style="right: 30%; top: 40px;"></div>
-            </div>
-            
-            <!-- 下部ラベル -->
-            <div class="bottom-labels">
-                <span class="bottom-label">実践的目標</span>
-                <span class="bottom-label">ターゲット層</span>
-            </div>
-            
-            <!-- AI活用表示 -->
-            <div class="ai-indicator">AI活用</div>
+        <div class="title-box">作戦概要：実戦投入テーマ公開</div>
+        
+        <h1 class="main-title">どんな課題に<br>挑む？</h1>
+        
+        <div class="sub-message">
+            難解な理論は不要。<br>
+            必要なのは「明日から使える仕組み」だ。<br>
+            現申込者のリアルな課題を公開する。
         </div>
-    </div>
+
+        <div class="status-monitor">
+            <div class="status-label">
+                <span>SYNCHRONIZATION RATE（実装精度）</span>
+                <span>66.7%</span>
+            </div>
+            <div class="sync-bar-container">
+                <div class="sync-bar-fill"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="stamp-box">最優先事項</div>
+        <div class="emergency-label">
+            EMERGENCY EMERGENCY EMERGENCY<br>
+            INTERNAL USE ONLY / NERV ONLY
+        </div>
+        <div style="height: 10px;"></div>
+        <div class="hazard-stripe"></div>
+    </footer>
 </body>
 </html>
