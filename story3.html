@@ -3,120 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI_BOOTCAMP_STORY_PAGE3</title>
-    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
+    <title>NERV_FINAL_INSTRUCTION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
             --eva-red: #FF0000;
             --eva-black: #000000;
             --eva-white: #FFFFFF;
+            --eva-orange: #FF9900;
         }
 
         html, body {
             background-color: var(--eva-black);
-            height: 100dvh;
-            width: 100vw;
+            height: 100dvh; width: 100vw;
             margin: 0; padding: 0;
             overflow: hidden;
             font-family: 'Shippori Mincho B1', serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+
+        /* 画面全体のグリッド背景（NERVモニター風） */
+        .bg-grid {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
         }
 
         .master-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 150px 30px 200px 30px; 
-            justify-content: center;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            padding: 140px 30px 180px 30px; 
+            justify-content: space-between;
+            box-sizing: border-box;
             position: relative;
+        }
+
+        /* アラート枠 */
+        .alert-frame {
+            border: 2px solid var(--eva-red);
+            padding: 20px 10px;
+            text-align: center;
+            background: rgba(255, 0, 0, 0.02);
+            position: relative;
+        }
+        .alert-frame::before, .alert-frame::after {
+            content: "EMERGENCY";
+            position: absolute; width: 100%; left: 0;
+            background: var(--eva-red); color: var(--eva-black);
+            font-family: 'Roboto Mono'; font-size: 10px; font-weight: bold;
+        }
+        .alert-frame::before { top: -14px; }
+        .alert-frame::after { bottom: -14px; }
+
+        .main-call {
+            font-size: 2.8rem;
+            color: var(--eva-white);
+            line-height: 1.1;
+            letter-spacing: -0.1em;
+            font-weight: 900;
+        }
+
+        .red-accent { color: var(--eva-red); }
+
+        /* 期限表示：NERVタイマー風 */
+        .deadline-box {
+            margin: 30px 0;
             text-align: center;
         }
-
-        /* 背景に大きな「終」をうっすら配置 */
-        .bg-kanji {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 25rem;
-            color: rgba(255, 0, 0, 0.03);
-            z-index: -1;
-            font-weight: 900;
-        }
-
-        .main-callout {
-            margin-bottom: 40px;
-        }
-
-        .giant-text {
-            font-size: 3.5rem;
-            color: var(--eva-white);
-            line-height: 1.2;
-            letter-spacing: -0.1em;
-            display: block;
-            font-weight: 900;
-        }
-
-        .red-text {
+        .deadline-label {
             color: var(--eva-red);
+            font-family: 'Roboto Mono';
+            font-size: 0.8rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 5px;
         }
-
-        .sub-message {
+        .deadline-date {
+            font-size: 4rem;
             color: var(--eva-white);
-            font-size: 1.2rem;
-            margin-top: 50px;
-            letter-spacing: 0.2em;
-            border-top: 1px solid var(--eva-red);
-            border-bottom: 1px solid var(--eva-red);
-            padding: 15px 0;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .cta-instruction {
-            margin-top: 60px;
-            background-color: var(--eva-red);
-            color: var(--eva-black);
-            padding: 10px 20px;
-            font-size: 1rem;
             font-weight: 900;
+            line-height: 1;
+            font-family: 'Roboto Mono', monospace;
+            border: 1px solid var(--eva-red);
             display: inline-block;
+            padding: 5px 20px;
         }
 
-        .footer-id {
-            position: absolute;
-            bottom: 120px;
-            left: 0;
+        /* 下部ボタン/リンク誘導 */
+        .instruction-area {
+            text-align: center;
+        }
+        .cta-button {
+            background: var(--eva-red);
+            color: var(--eva-black);
+            padding: 12px 0;
             width: 100%;
-            color: rgba(255, 255, 255, 0.3);
-            font-family: monospace;
-            font-size: 10px;
-            letter-spacing: 0.5em;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+        .sub-text {
+            color: var(--eva-orange);
+            font-size: 0.75rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+        }
+
+        /* 画面端のシステムログ */
+        .sys-log {
+            position: absolute;
+            bottom: 155px; left: 30px;
+            color: var(--eva-red);
+            font-family: 'Roboto Mono';
+            font-size: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-kanji">完</div>
+    <div class="bg-grid"></div>
 
     <div class="master-container">
-        <section class="main-callout">
-            <span class="giant-text">次は、</span>
-            <span class="giant-text"><span class="red-text">君の番</span>だ。</span>
+        <section class="alert-frame">
+            <div class="main-call">
+                次は、<br>
+                <span class="red-accent">君の任務</span>を<br>
+                聞かせてくれ。
+            </div>
         </section>
 
-        <p class="sub-message">
-            君の任務を、<br>
-            ここに持ち込め。
-        </p>
+        <section class="deadline-box">
+            <div class="deadline-label">LIMIT_OF_APPLICATION</div>
+            <div class="deadline-date">01/31</div>
+            <div style="color:var(--eva-red); font-size: 0.9rem; margin-top:5px; font-weight: 900;">
+                作戦開始期限：23:59まで
+            </div>
+        </section>
 
-        <div class="cta-instruction">
-            詳細はプロフィールリンクを確認せよ
-        </div>
+        <section class="instruction-area">
+            <div class="cta-button">プロフィールリンクへ直行せよ</div>
+            <div class="sub-text">適合者、追加募集中。</div>
+        </section>
 
-        <div class="footer-id">AD_CARD: AI_BOOTCAMP_A17</div>
+        <div class="sys-log">SIGNAL: FINAL_RECRUITMENT_PHASE_03</div>
     </div>
 
 </body>
