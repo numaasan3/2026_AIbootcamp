@@ -3,216 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MISSION: AI_BOOTCAMP_PHASE1</title>
+    <title>PHASE_02: TARGET_ANALYSIS</title>
     <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --eva-red: #FF0000;
-            --eva-black: #050505;
+            --eva-black: #000000;
             --eva-orange: #FF9900;
-            --eva-yellow: #FFCC00;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --eva-dark-red: #800000;
         }
 
         body {
             background-color: var(--eva-black);
             color: #fff;
             font-family: 'Shippori Mincho B1', serif;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            border: 4px solid var(--eva-red);
+            border: 2px solid var(--eva-red);
         }
 
-        /* ハザードパターン */
-        .hazard-stripe {
-            height: 15px;
+        /* ハザードラインのブラッシュアップ */
+        .hazard-bar {
+            height: 12px;
             background: repeating-linear-gradient(
-                45deg,
-                var(--eva-yellow),
-                var(--eva-yellow) 10px,
-                var(--eva-black) 10px,
-                var(--eva-black) 20px
+                -45deg,
+                #000,
+                #000 10px,
+                var(--eva-orange) 10px,
+                var(--eva-orange) 20px
             );
-            width: 100%;
+            border-bottom: 2px solid var(--eva-red);
         }
 
-        /* ヘッダーセクション */
         header {
-            padding: 10px;
-            border-bottom: 2px solid var(--eva-red);
-            font-family: 'Share Tech Mono', monospace;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-        }
-
-        .system-code {
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.7rem;
             color: var(--eva-red);
-            letter-spacing: 1px;
+            border-bottom: 1px solid var(--eva-dark-red);
         }
 
-        /* メインビジュアル */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .main-container {
+            padding: 20px 15px;
+            flex-grow: 1;
+        }
+
+        .headline {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .headline h1 {
+            font-size: 2.4rem;
+            color: var(--eva-red);
+            letter-spacing: -0.1rem;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .headline-sub {
+            background-color: #fff;
+            color: #000;
+            display: inline-block;
+            padding: 2px 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* 個別事案カードのデザイン強化 */
+        .mission-card {
+            border-left: 1px solid var(--eva-red);
+            border-right: 1px solid var(--eva-red);
+            border-bottom: 1px solid var(--eva-red);
+            margin-bottom: 20px;
             position: relative;
-            padding: 20px;
+            background: linear-gradient(180deg, rgba(255,0,0,0.1) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .card-header {
+            background: var(--eva-red);
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.75rem;
+            padding: 2px 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            text-align: justify;
+        }
+
+        .mission-tag {
+            text-align: right;
+            color: var(--eva-orange);
+            font-size: 0.8rem;
+            border-top: 1px dotted var(--eva-dark-red);
+            padding-top: 5px;
+        }
+
+        .mission-tag span {
+            font-size: 0.6rem;
+            margin-right: 5px;
+        }
+
+        /* メッセージエリア */
+        .conclusion {
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px double var(--eva-red);
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .conclusion p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #fff;
             text-align: center;
         }
 
-        .bg-hexagon {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            background-color: rgba(255, 0, 0, 0.05);
-            clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-            z-index: -1;
-            animation: pulse 4s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from { transform: scale(1); opacity: 0.1; }
-            to { transform: scale(1.5); opacity: 0.3; }
-        }
-
-        .title-box {
-            background-color: #fff;
-            color: #000;
-            padding: 5px 15px;
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-
-        .main-title {
-            font-size: 3rem;
-            line-height: 1.1;
-            letter-spacing: -0.2rem;
-            color: var(--eva-red);
-            text-shadow: 2px 2px 0px #fff;
-            margin-bottom: 20px;
-        }
-
-        .sub-message {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            letter-spacing: 0.1rem;
-            background: rgba(255, 0, 0, 0.15);
-            padding: 10px;
-            border-left: 5px solid var(--eva-red);
-            text-align: left;
-        }
-
-        /* シンクロ率セクション */
-        .status-monitor {
-            width: 90%;
-            margin-top: 30px;
-            border: 1px solid var(--eva-orange);
-            padding: 10px;
-        }
-
-        .status-label {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.8rem;
+        .conclusion b {
             color: var(--eva-orange);
-            display: flex;
-            justify-content: space-between;
+            font-size: 1.1rem;
         }
 
-        .sync-bar-container {
-            height: 20px;
-            background: #222;
-            margin-top: 5px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sync-bar-fill {
-            height: 100%;
-            width: 66.7%;
-            background: linear-gradient(90deg, #550000, var(--eva-red));
-            box-shadow: 0 0 10px var(--eva-red);
-        }
-
-        /* フッター */
         footer {
             padding: 15px;
-            position: relative;
-        }
-
-        .stamp-box {
-            border: 2px solid var(--eva-red);
-            color: var(--eva-red);
-            padding: 5px 10px;
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: bold;
-            transform: rotate(-5deg);
-        }
-
-        .emergency-label {
-            position: absolute;
-            right: 15px;
-            bottom: 35px;
             font-family: 'Share Tech Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--eva-red);
-            text-align: right;
+            background: #111;
+        }
+
+        .bottom-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .percent-large {
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .percent-unit { font-size: 1rem; }
+
+        .progress-container {
+            width: 100%;
+            height: 8px;
+            background: #333;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            width: 66.7%;
+            height: 100%;
+            background: var(--eva-red);
+            box-shadow: 0 0 10px var(--eva-red);
         }
     </style>
 </head>
 <body>
-    <div class="hazard-stripe"></div>
-    
+    <div class="hazard-bar"></div>
     <header>
-        <div class="system-code">MAGI_SYSTEM: ELABORATION_MODE_ON</div>
-        <div class="system-code">A-17: WARNING</div>
+        <span>FILE: SUBJECT_ANALYSIS_2024</span>
+        <span>STATUS: ANALYZING...</span>
     </header>
 
-    <main>
-        <div class="bg-hexagon"></div>
-        
-        <div class="title-box">作戦概要：実戦投入テーマ公開</div>
-        
-        <h1 class="main-title">どんな課題に<br>挑む？</h1>
-        
-        <div class="sub-message">
-            難解な理論は不要。<br>
-            必要なのは「明日から使える仕組み」だ。<br>
-            現申込者のリアルな課題を公開する。
+    <div class="main-container">
+        <div class="headline">
+            <h1>志願者の<br>個別事案解析</h1>
+            <div class="headline-sub">実装、完遂、或いは沈黙。</div>
         </div>
 
-        <div class="status-monitor">
-            <div class="status-label">
-                <span>SYNCHRONIZATION RATE（実装精度）</span>
-                <span>66.7%</span>
+        <div class="mission-card">
+            <div class="card-header">
+                <span>PERSONNEL_A-01</span>
+                <span>PRIORITY: HIGH</span>
             </div>
-            <div class="sync-bar-container">
-                <div class="sync-bar-fill"></div>
+            <div class="card-body">
+                <p>「セミナー運営に忙殺される日々を終焉させたい。AIにルーチンを委譲し、人間はより創造的領域へ移行すべきだ。」</p>
+                <div class="mission-tag">▶ 運営完全自動化ミッション</div>
             </div>
         </div>
-    </main>
+
+        <div class="mission-card">
+            <div class="card-header">
+                <span>PERSONNEL_B-02</span>
+                <span>STATUS: ACTIVE</span>
+            </div>
+            <div class="card-body">
+                <p>「地域の全店舗情報を手動で追うのは非効率。AIを巡回させ、デジタル掲示板へ一括同期・管理する体制を構築する。」</p>
+                <div class="mission-tag">▶ 地域情報一括同期ミッション</div>
+            </div>
+        </div>
+
+        <div class="mission-card">
+            <div class="card-header">
+                <span>PERSONNEL_C-03</span>
+                <span>TYPE: RAPID_DEV</span>
+            </div>
+            <div class="card-body">
+                <p>「アイデアは存在する。だが形にするリソースが欠けている。AIを右腕とし、HP実装まで数日で完遂させる。」</p>
+                <div class="mission-tag">▶ 0→1最速具現化ミッション</div>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <p>
+                エンジニアの集会ではない。<br>
+                <b>「現場の課題を解決したい仲間」</b>が<br>
+                現在、集結しつつある。
+            </p>
+        </div>
+    </div>
 
     <footer>
-        <div class="stamp-box">最優先事項</div>
-        <div class="emergency-label">
-            EMERGENCY EMERGENCY EMERGENCY<br>
-            INTERNAL USE ONLY / NERV ONLY
+        <div class="bottom-status">
+            <div style="color: var(--eva-red); font-size: 0.7rem;">
+                AI_SYNCHRO_RATE
+            </div>
+            <div class="percent-large">66.7<span class="percent-unit">%</span></div>
         </div>
-        <div style="height: 10px;"></div>
-        <div class="hazard-stripe"></div>
+        <div class="progress-container">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="hazard-bar"></div>
     </footer>
 </body>
 </html>
