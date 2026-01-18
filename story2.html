@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AI_BOOTCAMP_STORY_SAFE_SIZE</title>
+    <title>AI_BOOTCAMP_STORY_ADJUSTED</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Shippori+Mincho+B1:wght@900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,10 +13,9 @@
             --eva-white: #FFFFFF;
         }
 
-        /* 全体：はみ出しを物理的に禁止 */
         html, body {
             background-color: var(--eva-black);
-            height: 100dvh; /* 動的ビューポート対応 */
+            height: 100dvh;
             width: 100%;
             margin: 0;
             padding: 0;
@@ -25,11 +24,8 @@
             box-sizing: border-box;
         }
 
-        *, *:before, *:after {
-            box-sizing: inherit;
-        }
+        *, *:before, *:after { box-sizing: inherit; }
 
-        /* 9:16比率を維持するメインコンテナ */
         .story-container {
             width: 100%;
             height: 100%;
@@ -37,41 +33,39 @@
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            /* 上下80pxをストーリーUI用セーフエリアとして確保 */
-            padding: 80px 20px 100px 20px; 
-            border: 1px solid rgba(255, 0, 0, 0.2);
+            /* 上下のUI干渉を避けるため余白をさらに調整 */
+            padding: 90px 24px 110px 24px; 
         }
 
-        /* 装飾：ハザードライン（位置をセーフエリア内に調整） */
+        /* ハザードライン：重なり防止のため位置を固定 */
         .hazard-stripe {
-            height: 10px;
+            height: 12px;
             background: repeating-linear-gradient(45deg, #000, #000 8px, var(--eva-orange) 8px, var(--eva-orange) 16px);
             width: 100%;
             position: absolute;
             left: 0;
+            z-index: 20;
         }
-        .top { top: 65px; }
-        .bottom { bottom: 85px; }
+        .top { top: 70px; }
+        .bottom { bottom: 95px; }
 
-        /* ヘッダー情報 */
         .system-header {
             font-family: 'Roboto Mono', monospace;
-            font-size: 9px;
+            font-size: 8px;
             color: var(--eva-orange);
             display: flex;
             justify-content: space-between;
             margin-bottom: 5px;
         }
 
-        /* メインタイトル：サイズを少し絞って圧迫感と安全性を両立 */
         .main-title {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .giant-text {
-            font-size: 3.2rem; /* 4.0から縮小 */
+            font-size: 3rem;
             color: var(--eva-red);
-            line-height: 1.0;
+            line-height: 0.95;
             letter-spacing: -0.15em;
             display: block;
             font-weight: 900;
@@ -79,116 +73,118 @@
         .sub-bar {
             background: var(--eva-white);
             color: var(--eva-black);
-            font-size: 1rem;
+            font-size: 0.9rem;
             display: inline-block;
-            padding: 1px 12px;
+            padding: 2px 12px;
             margin-top: 8px;
             font-weight: 900;
         }
 
-        /* 隊員ミッションエリア：高さを自動調整 */
         .missions-container {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
         }
         .mission-window {
             border: 1px solid var(--eva-red);
             background: rgba(40, 0, 0, 0.4);
-            padding: 8px 10px;
+            padding: 10px;
             position: relative;
         }
         .personnel-id {
             color: var(--eva-orange);
             font-family: 'Roboto Mono';
-            font-size: 10px;
+            font-size: 9px;
             display: block;
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
         .personnel-voice {
             color: var(--eva-white);
-            font-size: 0.85rem; /* スマホ閲覧用に最適化 */
-            line-height: 1.3;
+            font-size: 0.8rem;
+            line-height: 1.4;
             font-weight: 900;
         }
         .mission-status {
             color: var(--eva-red);
             font-size: 0.7rem;
-            margin-top: 5px;
+            margin-top: 6px;
             border-top: 1px dashed var(--eva-red);
-            padding-top: 3px;
+            padding-top: 4px;
             text-align: right;
             font-weight: 900;
         }
 
-        /* シンクロ率セクション */
+        /* シンクロ率：レイアウトを横並びに変更し、重なりを回避 */
         .sync-section {
-            margin: 15px 0;
+            margin-top: 10px;
+            padding: 10px 0;
+            border-top: 1px solid rgba(255, 0, 0, 0.3);
         }
-        .sync-header {
+        .sync-visual-area {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 2px;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+        .sync-bar-container {
+            flex-grow: 1;
+        }
+        .sync-label {
+            font-size: 8px; 
+            color: var(--eva-red); 
+            font-family:'Roboto Mono';
+            margin-bottom: 4px;
         }
         .sync-value {
             font-size: 2.2rem;
             color: var(--eva-white);
             font-weight: 900;
             line-height: 1;
+            flex-shrink: 0;
         }
         .sync-bar-outer {
-            height: 8px;
+            height: 10px;
             background: #200;
             width: 100%;
-            margin-bottom: 5px;
+            border: 1px solid #400;
         }
         .sync-bar-inner {
             height: 100%;
             width: 66.7%;
             background: var(--eva-red);
+            box-shadow: 0 0 8px var(--eva-red);
         }
         .sync-desc {
             color: var(--eva-orange);
             font-size: 0.65rem;
-            line-height: 1.3;
+            line-height: 1.4;
             text-align: justify;
         }
 
-        /* フッター */
         .footer-action {
             text-align: center;
+            margin-top: 10px;
         }
         .seal-red {
             border: 2px solid var(--eva-red);
             color: var(--eva-red);
             display: inline-block;
             padding: 2px 15px;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
-            transform: rotate(-1deg);
+            margin-bottom: 5px;
         }
         .footer-note {
             color: var(--eva-orange);
-            font-size: 0.75rem;
-            margin-top: 8px;
+            font-size: 0.7rem;
             font-weight: bold;
-        }
-
-        /* 背景ログ装飾（うっすら） */
-        .bg-deco {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 50% 50%, #110000 0%, #000 100%);
-            z-index: -2;
         }
     </style>
 </head>
 <body>
-
-    <div class="bg-deco"></div>
 
     <div class="story-container">
         <div class="hazard-stripe top"></div>
@@ -208,37 +204,33 @@
         <main class="missions-container">
             <div class="mission-window">
                 <span class="personnel-id">PERSONNEL_A-01</span>
-                <div class="personnel-voice">
-                    「セミナー運営に追われる日々を終わらせたい。AIに全部投げて、自分はもっとクリエイティブなことに時間を使いたい。」
-                </div>
+                <div class="personnel-voice">「セミナー運営に追われる日々を終わらせたい。AIに全部投げて、自分はもっとクリエイティブなことに時間を使いたい。」</div>
                 <div class="mission-status">▶︎ 運営完全自動化ミッション</div>
             </div>
 
             <div class="mission-window">
                 <span class="personnel-id">PERSONNEL_B-02</span>
-                <div class="personnel-voice">
-                    「自分の住んでいる街にある全店舗の営業時間をいちいち確認して回るのは無駄。AIを街中に巡回させて、一元管理したい。」
-                </div>
+                <div class="personnel-voice">「自分の住んでいる街にある全店舗の営業時間をいちいち確認して回るのは無駄。AIを街中に巡回させて、一元管理したい。」</div>
                 <div class="mission-status">▶︎ 地域情報一括同期ミッション</div>
             </div>
 
             <div class="mission-window">
                 <span class="personnel-id">PERSONNEL_C-03</span>
-                <div class="personnel-voice">
-                    「アイデアはあるが形にする人がいない。AIを右腕にして、HP実装まで数日でやり遂げたい。」
-                </div>
+                <div class="personnel-voice">「アイデアはあるが形にする人がいない。AIを右腕にして、HP実装まで数日でやり遂げたい。」</div>
                 <div class="mission-status">▶︎ 0→1最速具現化ミッション</div>
             </div>
         </main>
 
         <section class="sync-section">
-            <div class="sync-header">
-                <span style="font-size: 8px; color: var(--eva-red); font-family:'Roboto Mono'">AI_SYNCHRO_RATE</span>
-                <span class="sync-value">66.7<span style="font-size: 0.8rem">%</span></span>
+            <div class="sync-visual-area">
+                <div class="sync-bar-container">
+                    <div class="sync-label">AI_SYNCHRO_RATE</div>
+                    <div class="sync-bar-outer"><div class="sync-bar-inner"></div></div>
+                </div>
+                <div class="sync-value">66.7<span style="font-size: 0.8rem">%</span></div>
             </div>
-            <div class="sync-bar-outer"><div class="sync-bar-inner"></div></div>
             <p class="sync-desc">
-                平均シンクロ率66.7%。日常的な利用はクリアしているが、ビジネスを変革させる『覚醒状態』には至っていない。このキャンプで残りの33.3%を埋めよ。
+                平均シンクロ率66.7%。日常的利用はクリアしているが、ビジネスを変革させる『覚醒状態』には至っていない。このキャンプで残りの33.3%を埋めよ。
             </p>
         </section>
 
